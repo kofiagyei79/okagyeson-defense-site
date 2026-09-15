@@ -252,5 +252,95 @@
                 </div>
             </div>
         </section>
-
         <!-- Portals Grid (Forms) -->
+        <section id="portal-section" class="forms-grid">
+            
+            <!-- Service Request Form -->
+            <div class="form-section">
+                <h2 style="color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-top: 0;">Secure Service Request</h2>
+                <p style="color: #64748b; font-size: 14px; margin-bottom: 25px;">Submit details to schedule an infrastructure assessment or configure defensive setups.</p>
+
+                <form action="https://formspree.io" method="POST">
+                    <div style="background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px; margin-bottom: 20px; font-size: 13px; color: #1e293b; display: flex; align-items: flex-start; gap: 10px;">
+                        <span style="font-size: 16px; line-height: 1;">🔒</span>
+                        <div>
+                            <strong>End-to-End Ingestion Encryption:</strong> This intake portal is secured via transport-layer encryption. Scope parameters, contact vectors, and organizational definitions are processed under zero-exposure criteria and routed directly to our secure incident handling pool.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Organization Name:</label>
+                        <input type="text" id="company" name="organization_name" placeholder="e.g., Medical Center or Logistics Node" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Point of Contact Name:</label>
+                        <input type="text" id="name" name="contact_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Official Business Email:</label>
+                        <input type="email" id="email" name="_replyto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Requested Cyber Security Service:</label>
+                        <select id="service" name="requested_service" required>
+                            <option value="" disabled selected>-- Select a Service Tier --</option>
+                            <option value="Continuous Visibility & Managed Log Detection">Managed Log Detection (SIEM)</option>
+                            <option value="Healthcare HIPAA Compliance Auditing">Regulatory Compliance Auditing</option>
+                            <option value="Managed Incident Response Deployment">Incident Response Deployment</option>
+                            <option value="Full-Kill Chain Penetration Testing">Penetration Testing / Assessment</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Scope of Request / Environment Details:</label>
+                        <textarea id="message" name="environment_details" rows="4" placeholder="Briefly describe known endpoints or compliance targets..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit Service Request</button>
+                </form>
+            </div>
+
+            <!-- Careers Form -->
+            <div class="form-section">
+                <h2 style="color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-top: 0;">Careers & Operations Intake</h2>
+                <p style="color: #64748b; font-size: 14px; margin-bottom: 25px;">Apply to join our active defensive pool safeguarding critical systems.</p>
+
+                <form action="https://formspree.io" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="app-name">Full Name:</label>
+                        <input type="text" id="app-name" name="applicant_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="app-email">Contact Email Address:</label>
+                        <input type="email" id="app-email" name="_replyto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="specialization">Target Specialization:</label>
+                        <select id="specialization" name="target_specialization" required>
+                            <option value="" disabled selected>-- Select Your Core Track --</option>
+                            <option value="SOC Analyst / Custom Parser Engineer">SOC Analyst / Custom Parser Engineer</option>
+                            <option value="Penetration Tester / Red Teamer">Penetration Tester (Kali Linux / Metasploit)</option>
+                            <option value="Compliance Mapping Specialist">Compliance Specialist (HIPAA / Supply Chain)</option>
+                            <option value="Incident Responder / Threat Hunter">Incident Responder / Threat Hunter</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="certs">Active Certifications & Experience Summary:</label>
+                        <textarea id="certs" name="certifications_summary" rows="4" placeholder="List active badges (e.g., CySA+, CCNA) and relevant degrees..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="resume">Upload Resume / CV (PDF or Word):</label>
+                        <input type="file" id="resume" name="resume_file" accept=".pdf,.doc,.docx" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit Job Application</button>
+                </form>
+            </div>
+
+        </section>
+    </div>
+
+    <footer>
+        <p style="margin-bottom: 5px; color: #94a3b8;">145 Central St, Southbridge, MA 01550</p>
+        &copy; 2026 Okagyeson Cyber Defense LLC. All Rights Reserved. Securing Assets, Safeguarding Privacy.
+    </footer>
+
+</body>
+</html>
