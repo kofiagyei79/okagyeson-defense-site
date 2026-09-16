@@ -1,6 +1,26 @@
-{
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "okagyeson-defense-site",
-  "main": "worker.js",
-  "compatibility_date": "2026-09-16"
-}
+export default {
+  async fetch(request, env, ctx) {
+    // The exact path to retrieve the raw index.html code from your GitHub repository branch
+    const githubHtmlUrl = "https://githubusercontent.com";
+    
+    try {
+      const response = await fetch(githubHtmlUrl);
+      
+      // If GitHub is down or the path is misspelled, provide a backup message
+      if (!response.ok) {
+        return new Response("Security Gateway Error: Unable to locate source assets.", { status: 500 });
+      }
+      
+      const htmlBody = await response.text();
+      
+      // Return the file with explicit HTML headers so browsers display the visual elements properly
+      return new Response(htmlBody, {
+        headers: {
+          "content-type": "text/html;charset=UTF-8",
+        },
+      });
+    } catch (error) {
+      return new Response("Cyber Defense Gateway Timeout", { status: 500 });
+    }
+  },
+};
