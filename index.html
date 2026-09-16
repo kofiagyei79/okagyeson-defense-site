@@ -1,1 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Okagyeson Cyber Defense LLC provides elite continuous visibility, regulatory compliance audits, and managed incident response. Securing critical supply chains, healthcare systems, and medical infrastructure.">
+    <title>Okagyeson Cyber Defense LLC | Enterprise Security & Compliance</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e3a8a;
+            --accent: #3b82f6;
+            --text: #334155;
+            --light: #f8fafc;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            background-color: var(--light);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--accent);
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--accent);
+        }
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .hero h2 {
+            font-size: 1.3rem;
+            color: #60a5fa;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 850px;
+            margin: 0 auto 30px auto;
+            color: #cbd5e1;
+        }
+        .cert-container {
+            margin-top: 20px;
+        }
+        .cert-badge {
+            display: inline-block;
+            background-color: rgba(59, 130, 246, 0.2);
+            border: 1px solid var(--accent);
+            color: #e2e8f0;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 5px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            border-top: 4px solid var(--accent);
+        }
+        .service-card h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        .architecture-section {
+            margin-bottom: 60px;
+        }
+        .arch-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            margin-bottom: 25px;
+            border-left: 4px solid var(--secondary);
+        }
+        .arch-card h3 {
+            margin-top: 0;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        .arch-meta {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        .tools-badge {
+            display: inline-block;
+            background-color: #e2e8f0;
+            color: #1e293b;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-right: 8px;
+            margin-top: 5px;
+        }
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        @media (max-width: 900px) {
+            .forms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .form-section {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            border-top: 4px solid var(--secondary);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #1e293b;
+            background-color: #ffffff;
+        }
+        .submit-btn {
+            background-color: var(--secondary);
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+        }
+        .submit-btn:hover {
+            background-color: var(--accent);
+        }
+        footer {
+            background-color: var(--primary);
+            color: #94a3b8;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            font-size: 14px;
+            border-top: 1px solid #334155;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">OKAGYESON CYBER DEFENSE</div>
+        <nav>
+            <a href="#services">Overview</a>
+            <a href="#services">Managed Services</a>
+            <a href="#architecture">SOC Architecture</a>
+            <a href="#portal-section">Careers</a>
+            <a href="#portal-section">Client Portal</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Okagyeson Cyber Defense LLC</h1>
+        <h2>Elite Continuous Visibility | Regulatory Compliance Audits | Managed Incident Response</h2>
+        <p>Securing critical supply chains, regional transport nodes, and medical logistics infrastructure from emerging ransomware and data exposure.</p>
+        <div class="cert-container">
+            <span class="cert-badge">CompTIA CySA+ Certified</span>
+            <span class="cert-badge">Cisco CCNA Engineer</span>
+            <span class="cert-badge">Post-Graduate Cyber Security Degree</span>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- Services Section -->
+        <section id="services">
+            <h2 style="text-align: center; color: var(--primary); margin-bottom: 4px;">Managed Services</h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 40px;">Tailored operational security for critical systems and small businesses.</p>
+            
+            <div class="services">
+                <div class="service-card">
+                    <h3>Managed Log Detection</h3>
+                    <p>Deploying advanced SIEM configurations and custom parsing rules to hunt for anomalous behaviors, credential access modifications, and privilege escalation vectors before they disrupt operations.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Regulatory Compliance</h3>
+                    <p>Comprehensive auditing and mapping structures tailored specifically for healthcare environments requiring strict HIPAA data access compliance and supply chain security frameworks.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Incident Response</h3>
+                    <p>Fast containment strategies built to isolate threat actors instantly, preserve volatile RAM evidence, and systematically eliminate persistence within compromised network environments.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Deployments & Architecture Section -->
+        <section id="architecture" class="architecture-section">
+            <h2 style="text-align: center; color: var(--primary); margin-bottom: 4px;">Technical Deployments & Proven Architecture</h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 40px;">Validated system configurations engineered to industry standards.</p>
+
+            <div class="arch-card">
+                <h3>1. Enterprise Hybrid SOC Architecture</h3>
+                <div class="arch-meta">Architecture & Tools: EVE-NG, pfSense Firewall Gateway, Splunk Enterprise SIEM</div>
+                <p>Configured a centralized pfSense gateway to segment a corporate topology into LAN, DMZ, and Management zones. Deployed Splunk Universal Forwarders across virtual endpoints to aggregate data and author automated dashboards filtering for privilege escalation vectors.</p>
+                <div>
+                    <span class="tools-badge">EVE-NG</span>
+                    <span class="tools-badge">pfSense</span>
+                    <span class="tools-badge">Splunk Enterprise</span>
+                </div>
+            </div>
+
+            <div class="arch-card">
+                <h3>2. Regulatory Compliance Auditing & PHI Access Controls</h3>
+                <div>
+                    <span class="tools-badge">Splunk Analytics</span>
+                    <span class="tools-badge">Active Directory GPOs</span>
+                    <span class="tools-badge">HIPAA Compliance</span>
+                </div>
+            </div>
+
+            <div class="arch-card">
+                <h3>3. Full-Kill Chain Penetration Testing & Response</h3>
+                <div class="arch-meta">Architecture & Tools: Dual Kali Linux Attacking Nodes, Metasploit, Active Firewall Containment</div>
+                <p>Initiated controlled black-box penetration testing against target environments to discover and exploit open vectors. Verified system resilience, followed by executing a 4-frame incident response pillar (Triage, Identify, Contain, Eradicate) to isolate threats at the gateway layer while preserving volatile RAM evidence.</p>
+                <div>
+                    <span class="tools-badge">Kali Linux</span>
+                    <span class="tools-badge">Metasploit</span>
+                    <span class="tools-badge">Incident Response</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="portal-section">
+            <h2 style="text-align: center; color: var(--primary); margin-bottom: 4px;">Gateway Access Control</h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 30px; text-align: center;">Select a secure operations desk to interact with our defensive team.</p>
+            
+            <div class="forms-grid">
+                <!-- Client Portal Form -->
+                <div class="form-section">
+                    <h3 style="margin-top: 0; color: var(--primary); text-align: center;">Client Portal & Intake</h3>
+                    <form action="https://formspree.io" method="POST">
+                        <div class="form-group">
+                            <label for="client-name">Authorized Representative</label>
+                            <input type="text" id="client-name" name="name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="client-email">Corporate Email Address</label>
+                            <input type="email" id="client-email" name="email" required placeholder="jdoe@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="infrastructure">Infrastructure Tier</label>
+                            <select id="infrastructure" name="infrastructure_tier">
+                                <option value="critical-infrastructure">Critical Infrastructure / Logistics</option>
+                                <option value="healthcare">Healthcare Providers / Hospitals</option>
+                                <option value="legal">Law Firms / Corporate Legal</option>
+                                <option value="small-business">Small Business Network</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="threat-level">Requested Operations</label>
+                            <select id="threat-level" name="requested_operations">
+                                <option value="routine">Request Vulnerability Assessment</option>
+                                <option value="compromise">Suspected Threat Actor Persistence</option>
+                                <option value="active-ir">Active Incident Response</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="scope">Operational Scope Details</label>
+                            <textarea id="scope" name="scope_details" rows="4" required placeholder="Describe target environment or scope targets..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Initiate SecOps Intake</button>
+                    </form>
+                </div>
+
+                <!-- Career Portal Form -->
+                <div class="form-section">
+                    <h3 style="margin-top: 0; color: var(--primary); text-align: center;">Careers & Talent Network</h3>
+                    <form action="https://formspree.io" method="POST">
+                        <div class="form-group">
+                            <label for="candidate-name">Full Legal Name</label>
+                            <input type="text" id="candidate-name" name="name" required placeholder="Jane Smith">
+                        </div>
+                        <div class="form-group">
+                            <label for="candidate-email">Contact Email Address</label>
+                            <input type="email" id="candidate-email" name="email" required placeholder="jsmith@domain.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="primary-discipline">Primary Discipline</label>
+                            <select id="primary-discipline" name="discipline">
+                                <option value="soc-analyst">Blue Team / SOC Analyst</option>
+                                <option value="pentester">Red Team / Penetration Tester</option>
+                                <option value="compliance">Security Architect / Compliance Auditor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="certifications">Active Professional Credentials</label>
+                            <input type="text" id="certifications" name="certifications" placeholder="e.g., CompTIA CySA+, Cisco CCNA">
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Professional Background Summary</label>
+                            <textarea id="experience" name="experience_summary" rows="4" required placeholder="Summarize your hands-on technical competencies..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Submit Tactical Dossier</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div> <!-- Close container -->
+
+    <footer>
+        <p>&copy; 2026 Okagyeson Cyber Defense LLC. All Rights Reserved.</p>
+        <p>145 Central St, Southbridge, MA 01550</p>
+    </footer>
+
+</body>
+</html>
 
