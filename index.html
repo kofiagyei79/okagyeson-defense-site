@@ -218,7 +218,7 @@
             </div>
         </section>
 
-        <!-- Technical Deployments & Architecture Section -->
+                <!-- Technical Deployments & Architecture Section Continued -->
         <section id="architecture" class="architecture-section">
             <h2 style="text-align: center; color: var(--primary); margin-bottom: 4px;">Technical Deployments & Proven Architecture</h2>
             <p style="text-align: center; color: #64748b; margin-bottom: 40px;">Validated system configurations deployed by certified engineers.</p>
@@ -256,3 +256,75 @@
                     <form action="https://formspree.io" method="POST">
                         <div class="form-group">
                             <label for="client-name">Authorized Representative</label>
+                            <input type="text" id="client-name" name="name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="client-email">Corporate Email Address</label>
+                            <input type="email" id="client-email" name="email" required placeholder="jdoe@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="infrastructure">Infrastructure Tier</label>
+                            <select id="infrastructure" name="infrastructure_tier">
+                                <option value="critical-infrastructure">Critical Infrastructure / Logistics</option>
+                                <option value="healthcare">Healthcare Providers / Hospitals</option>
+                                <option value="legal">Law Firms / Corporate Legal Councils</option>
+                                <option value="other">Other Enterprise Network</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="threat-level">Current Operational State</label>
+                            <select id="threat-level" name="threat_level">
+                                <option value="routine">Routine Security Architecture Audit</option>
+                                <option value="compromise">Suspected Threat Actor Persistence</option>
+                                <option value="active-ir">Active Incident Response (Ransomware/Breach)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="scope">Operational Scope Details</label>
+                            <textarea id="scope" name="scope_details" rows="4" required placeholder="Describe target environment or event indicators..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Initiate SecOps Intake</button>
+                    </form>
+                </div>
+
+                <!-- Career Portal Form -->
+                <div class="form-section">
+                    <h3 style="margin-top: 0; color: var(--primary); text-align: center;">Cybersecurity Talent Network</h3>
+                    <form action="https://formspree.io" method="POST">
+                        <div class="form-group">
+                            <label for="candidate-name">Full Legal Name</label>
+                            <input type="text" id="candidate-name" name="name" required placeholder="Jane Smith">
+                        </div>
+                        <div class="form-group">
+                            <label for="candidate-email">Contact Email Address</label>
+                            <input type="email" id="candidate-email" name="email" required placeholder="jsmith@domain.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="primary-discipline">Primary Discipline</label>
+                            <select id="primary-discipline" name="discipline">
+                                <option value="soc-analyst">Blue Team / SOC Analyst</option>
+                                <option value="pentester">Red Team / Penetration Tester</option>
+                                <option value="compliance">Security Architect / Compliance Auditor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="certifications">Active Professional Credentials</label>
+                            <input type="text" id="certifications" name="certifications" placeholder="e.g., CompTIA Security+, CEH, CISSP, OSCP">
+                        </div>
+                        <div class="form-group">
+                            <label for="experience">Professional Background Summary</label>
+                            <textarea id="experience" name="experience_summary" rows="4" required placeholder="Summarize your hands-on technical competencies..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Submit Tactical Dossier</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div> <!-- Close container -->
+
+    <footer>
+        <p>&copy; 2026 Okagyeson Cyber Defense LLC. All Rights Reserved. Securing critical architectures worldwide.</p>
+    </footer>
+
+</body>
+</html>
