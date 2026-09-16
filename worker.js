@@ -348,6 +348,7 @@ export default {
     </header>
 
     <main>
-        <section id="sec-soc" class="page-section active-section">
+         <section id="sec-soc" class="page-section active-section">
             <h2 class="section-title">Security Operations Center</h2>
+            <p class="section-desc">Real-time enterprise threat monitoring and autonomous boundary protection profiles.</p> 
           
