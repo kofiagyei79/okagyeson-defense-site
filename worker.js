@@ -1,8 +1,4 @@
-export default {
-  async fetch(request, env, ctx) {
-    const htmlBody = `
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +29,6 @@ export default {
             overflow-x: hidden;
         }
 
-        /* Navigation Header */
         header {
             background-color: rgba(15, 20, 36, 0.85);
             backdrop-filter: blur(8px);
@@ -92,14 +87,8 @@ export default {
             border-radius: 4px;
             font-weight: 600;
             cursor: pointer;
-            transition: opacity 0.3s;
         }
 
-        .btn-header:hover {
-            opacity: 0.9;
-        }
-
-        /* Core Section Views */
         main {
             max-width: 1200px;
             margin: 7rem auto 4rem auto;
@@ -120,7 +109,6 @@ export default {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* SOC Dashboard Layout */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -160,7 +148,6 @@ export default {
 
         .bg-pulse-green { background-color: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); }
         .bg-pulse-blue { background-color: var(--accent-blue); box-shadow: 0 0 10px var(--accent-blue); }
-        .bg-pulse-red { background-color: var(--accent-red); box-shadow: 0 0 10px var(--accent-red); }
 
         .console-box {
             background-color: #020617;
@@ -171,7 +158,6 @@ export default {
             height: 300px;
             overflow-y: auto;
             color: #38bdf8;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
         }
 
         .console-line {
@@ -179,7 +165,6 @@ export default {
             font-size: 0.9rem;
         }
 
-        /* Service Cards Layout */
         .section-title {
             font-size: 2rem;
             margin-bottom: 0.5rem;
@@ -206,12 +191,6 @@ export default {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-blue);
         }
 
         .tier-badge {
@@ -222,7 +201,6 @@ export default {
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
-            align-self: flex-start;
             margin-bottom: 1rem;
         }
 
@@ -259,7 +237,6 @@ export default {
         .service-features li::before {
             content: "✓";
             color: var(--accent-green);
-            font-weight: bold;
         }
 
         .btn-card {
@@ -270,17 +247,14 @@ export default {
             border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
-            text-align: center;
-            transition: all 0.3s;
+            width: 100%;
         }
 
         .btn-card:hover {
             background-color: var(--accent-blue);
-            border-color: var(--accent-blue);
             color: #070a13;
         }
 
-        /* Careers & Jobs Layout */
         .jobs-list {
             display: flex;
             flex-direction: column;
@@ -295,13 +269,10 @@ export default {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
         }
 
         .job-meta h3 {
             font-size: 1.25rem;
-            margin-bottom: 0.25rem;
         }
 
         .job-details {
@@ -317,9 +288,7 @@ export default {
             border: 1px solid rgba(56, 139, 253, 0.3);
             padding: 0.6rem 1.5rem;
             border-radius: 4px;
-            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
         .btn-apply:hover {
@@ -327,53 +296,54 @@ export default {
             color: #070a13;
         }
 
-        /* Simple Dynamic Modal Popups */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.7);
             z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
+            align-items: center; justify-content: center;
         }
 
         .modal-content {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2.5rem;
-            max-width: 500px;
-            width: 100%;
-            position: relative;
+            border-radius: 8px; padding: 2.5rem;
+            max-width: 500px; width: 100%; position: relative;
         }
 
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-secondary);
-        }
-
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-    });
-  },
-};
-
+        .close-modal { position: absolute; top: 1rem; right: 1.5rem; cursor: pointer; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: var(--text-secondary); }
+        
         .form-group input, .form-group textarea, .form-group select {
-            width: 100%;
+            width: 100%; background-color: var(--bg-main);
+            border: 1px solid var(--border-color); padding: 0.75rem;
+            border-radius: 4px; color: var(--text-primary);
+        }
+
+        .btn-submit {
+            width: 100%; background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white; border: none; padding: 0.75rem; border-radius: 4px; font-weight: 600; cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo">🛡️ Okagyeson <span>Defense</span></div>
+            <nav>
+                <ul>
+                    <li><a onclick="switchTab('soc')" id="nav-soc" class="active">SOC Operations</a></li>
+                    <li><a onclick="switchTab('services')" id="nav-services">Our Services</a></li>
+                    <li><a onclick="switchTab('careers')" id="nav-careers">Careers</a></li>
+                </ul>
+            </nav>
+            <button class="btn-header" onclick="openModal('service-modal')">Request Audit</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="sec-soc" class="page-section active-section">
+            <h2 class="section-title">Security Operations Center</h2>
+          
