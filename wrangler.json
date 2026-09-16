@@ -1,6 +1,6 @@
 export default {
   async fetch(request, env, ctx) {
-    // This embeds your HTML layout directly inside the Worker script
+    // This embeds your HTML layout directly inside the Worker script memory
     const htmlBody = `
 <!DOCTYPE html>
 <html lang="en">
