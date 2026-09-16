@@ -20,6 +20,7 @@
             color: var(--text);
             background-color: var(--light);
             line-height: 1.6;
+            scroll-behavior: smooth;
         }
         header {
             background-color: var(--primary);
@@ -226,121 +227,32 @@
                 <h3>1. Enterprise Hybrid SOC Architecture</h3>
                 <p>Configured a centralized pfSense gateway to segment a corporate topology into LAN, DMZ, and Management zones. Deployed Splunk Universal Forwarders across virtual endpoints to aggregate data and author automated dashboards filtering for privilege escalation vectors.</p>
                 <div>
-                    <span class="tools-badge">EVE-NG</span>
-                    <span class="tools-badge">pfSense Firewall Gateway</span>
-                    <span class="tools-badge">Splunk Enterprise SIEM</span>
+                    <span class="tools-badge">pfSense</span>
+                    <span class="tools-badge">Splunk Enterprise</span>
+                    <span class="tools-badge">Active Directory</span>
                 </div>
             </div>
 
             <div class="arch-card">
-                <h3>2. Regulatory Compliance Auditing & PHI Access Controls</h3>
-                <p>Designed structured log audit trails specifically modeled after complex healthcare data ecosystems. Built proactive monitoring logic to track cross-zone database requests and ensure zero exposure of Protected Health Information (PHI).</p>
+                <h3>2. Vulnerability Management Pipeline</h3>
+                <p>Designed systematic network scanning and internal threat pipelines using automated assessment tooling. Deliverables include remediation planning tailored for fast mitigation against known exploited vulnerabilities (KEVs).</p>
                 <div>
-                    <span class="tools-badge">Splunk Analytics</span>
-                    <span class="tools-badge">Active Directory GPOs</span>
-                    <span class="tools-badge">HIPAA Framework Mapping</span>
-                </div>
-            </div>
-
-            <div class="arch-card">
-                <h3>3. Full-Kill Chain Penetration Testing & Response</h3>
-                <p>Initiated controlled black-box penetration testing against target environments to discover and exploit open vectors. Verified system resilience, followed by executing a 4-frame incident response pillar (Triage, Identify, Contain, Eradicate) to isolate threats at the gateway layer while preserving volatile RAM evidence.</p>
-                <div>
-                    <span class="tools-badge">Dual Kali Linux Attacking Nodes</span>
-                    <span class="tools-badge">Metasploit</span>
-                    <span class="tools-badge">Active Firewall Containment</span>
+                    <span class="tools-badge">Nessus Professional</span>
+                    <span class="tools-badge">OpenVAS</span>
+                    <span class="tools-badge">Linux Hardening</span>
                 </div>
             </div>
         </section>
-        <!-- Portals Grid (Forms) -->
-        <section id="portal-section" class="forms-grid">
+
+        <!-- Interactive Portal Section -->
+        <section id="portal-section">
+            <h2 style="text-align: center; color: var(--primary); margin-bottom: 4px;">Gateway Access Control</h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 10px;">Select a secure operations desk to interact with our defensive team.</p>
             
-            <!-- Service Request Form -->
-            <div class="form-section">
-                <h2 style="color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-top: 0;">Secure Service Request</h2>
-                <p style="color: #64748b; font-size: 14px; margin-bottom: 25px;">Submit details to schedule an infrastructure assessment or configure defensive setups.</p>
-
-                <form action="https://formspree.io" method="POST">
-                    <div style="background-color: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px; margin-bottom: 20px; font-size: 13px; color: #1e293b; display: flex; align-items: flex-start; gap: 10px;">
-                        <span style="font-size: 16px; line-height: 1;">🔒</span>
-                        <div>
-                            <strong>End-to-End Ingestion Encryption:</strong> This intake portal is secured via transport-layer encryption. Scope parameters, contact vectors, and organizational definitions are processed under zero-exposure criteria and routed directly to our secure incident handling pool.
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="company">Organization Name:</label>
-                        <input type="text" id="company" name="organization_name" placeholder="e.g., Medical Center or Logistics Node" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Point of Contact Name:</label>
-                        <input type="text" id="name" name="contact_name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Official Business Email:</label>
-                        <input type="email" id="email" name="_replyto" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="service">Requested Cyber Security Service:</label>
-                        <select id="service" name="requested_service" required>
-                            <option value="" disabled selected>-- Select a Service Tier --</option>
-                            <option value="Continuous Visibility & Managed Log Detection">Managed Log Detection (SIEM)</option>
-                            <option value="Healthcare HIPAA Compliance Auditing">Regulatory Compliance Auditing</option>
-                            <option value="Managed Incident Response Deployment">Incident Response Deployment</option>
-                            <option value="Full-Kill Chain Penetration Testing">Penetration Testing / Assessment</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Scope of Request / Environment Details:</label>
-                        <textarea id="message" name="environment_details" rows="4" placeholder="Briefly describe known endpoints or compliance targets..." required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Submit Service Request</button>
-                </form>
-            </div>
-
-            <!-- Careers Form -->
-            <div class="form-section">
-                <h2 style="color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 10px; margin-top: 0;">Careers & Operations Intake</h2>
-                <p style="color: #64748b; font-size: 14px; margin-bottom: 25px;">Apply to join our active defensive pool safeguarding critical systems.</p>
-
-                <form action="https://formspree.io" method="POST" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="app-name">Full Name:</label>
-                        <input type="text" id="app-name" name="applicant_name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="app-email">Contact Email Address:</label>
-                        <input type="email" id="app-email" name="_replyto" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="specialization">Target Specialization:</label>
-                        <select id="specialization" name="target_specialization" required>
-                            <option value="" disabled selected>-- Select Your Core Track --</option>
-                            <option value="SOC Analyst / Custom Parser Engineer">SOC Analyst / Custom Parser Engineer</option>
-                            <option value="Penetration Tester / Red Teamer">Penetration Tester (Kali Linux / Metasploit)</option>
-                            <option value="Compliance Mapping Specialist">Compliance Specialist (HIPAA / Supply Chain)</option>
-                            <option value="Incident Responder / Threat Hunter">Incident Responder / Threat Hunter</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="certs">Active Certifications & Experience Summary:</label>
-                        <textarea id="certs" name="certifications_summary" rows="4" placeholder="List active badges (e.g., CySA+, CCNA) and relevant degrees..." required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="resume">Upload Resume / CV (PDF or Word):</label>
-                        <input type="file" id="resume" name="resume_file" accept=".pdf,.doc,.docx" required>
-                    </div>
-                    <button type="submit" class="submit-btn">Submit Job Application</button>
-                </form>
-            </div>
-
-        </section>
-    </div>
-
-    <footer>
-        <p style="margin-bottom: 5px; color: #94a3b8;">145 Central St, Southbridge, MA 01550</p>
-        &copy; 2026 Okagyeson Cyber Defense LLC. All Rights Reserved. Securing Assets, Safeguarding Privacy.
-    </footer>
-
-</body>
-</html>
+            <div class="forms-grid">
+                <!-- Client Portal Form -->
+                <div class="form-section">
+                    <h3 style="margin-top: 0; color: var(--primary); text-align: center;">Incident Intake & Consultation</h3>
+                    <form action="https://formspree.io" method="POST">
+                        <div class="form-group">
+                            <label for="client-name">Authorized Representative</label>
