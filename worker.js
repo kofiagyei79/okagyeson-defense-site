@@ -4,7 +4,9 @@ export default {
     const path = url.pathname;
     const secureKey = env.RESEND_API_KEY;
 
-    // 1. ROUTE: Technical Service Consultation Requests
+    // ==========================================
+    // ROUTE 1: LEADS/AUDIT REQUEST FORM SUBMISSION
+    // ==========================================
     if (path === "/api/v1/services/request" && request.method === "POST") {
       try {
         const formData = await request.formData();
@@ -13,29 +15,26 @@ export default {
         const coverageScope = formData.get("coverage_scope") || "LOCAL";
 
         const emailResponse = await fetch("https://resend.com", {
-
-
           method: "POST",
           headers: { "Authorization": "Bearer " + secureKey, "Content-Type": "application/json" },
           body: JSON.stringify({
             from: "onboarding@resend.dev",
             to: "kofiagyei79@gmail.com",
             subject: "🚨 New Audit Request from " + companyName,
-            html: `<h3>Okagyeson Defense Network Intake Alert</h3>
-                   <p><strong>Company Name:</strong> ${companyName}</p>
-                   <p><strong>Corporate Email:</strong> ${corporateEmail}</p>
-                   <p><strong>Coverage Scope Target:</strong> ${coverageScope}</p>`
+            html: "<h3>Okagyeson Defense Network Intake Alert</h3><p><strong>Company Name:</strong> " + companyName + "</p><p><strong>Corporate Email:</strong> " + corporateEmail + "</p><p><strong>Coverage Scope Target:</strong> " + coverageScope + "</p>"
           })
         });
 
         if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error(errText); }
-        return new Response("<h1>[SUCCESS] Security Intake Transmission Received.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
+        return new Response("<h1>[SUCCESS] Security Intake Received.</h1><p><a href='/'>Return to dashboard.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
       } catch (err) { 
-        return new Response("<h1>Transmission Failure Error Node</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
+        return new Response("<h1>Transmission Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
       }
     }
 
-    // 2. ROUTE: Careers Application System Ingest with Attached PDF Document
+    // ==========================================
+    // ROUTE 2: CAREERS FORM WITH BINARY PDF ATTACHMENT
+    // ==========================================
     if (path === "/api/v1/careers/apply" && request.method === "POST") {
       try {
         const formData = await request.formData();
@@ -46,38 +45,34 @@ export default {
         const file = formData.get("resume");
 
         if (!file || !(file instanceof File) || file.size === 0) {
-          return new Response("<h1>Submission Error</h1><p>Missing credentials attachment element. A PDF file upload is mandatory.</p>", { status: 400, headers: { "Content-Type": "text/html; charset=utf-8" } });
+          return new Response("<h1>Submission Error</h1><p>Missing credentials file attachment.</p>", { status: 400, headers: { "Content-Type": "text/html; charset=utf-8" } });
         }
 
         const fileBuffer = await file.arrayBuffer();
         const base64Content = btoa(String.fromCharCode(...new Uint8Array(fileBuffer)));
 
         const emailResponse = await fetch("https://resend.com", {
-
-
           method: "POST",
           headers: { "Authorization": "Bearer " + secureKey, "Content-Type": "application/json" },
           body: JSON.stringify({
             from: "onboarding@resend.dev",
             to: "kofiagyei79@gmail.com",
             subject: "💼 New Candidate Application: " + appliedRole,
-            html: `<h3>New System Operator Application Ingested</h3>
-                   <p><strong>Operator Name:</strong> ${fullName}</p>
-                   <p><strong>Contact Email:</strong> ${email}</p>
-                   <p><strong>Deployment Region:</strong> ${targetRegion}</p>
-                   <p><strong>Applied Operational Role:</strong> ${appliedRole}</p>`,
+            html: "<h3>New Ingestion Event</h3><p><strong>Operator Name:</strong> " + fullName + "</p><p><strong>Contact Email:</strong> " + email + "</p><p><strong>Deployment Region:</strong> " + targetRegion + "</p><p><strong>Applied Role:</strong> " + appliedRole + "</p>",
             attachments: [{ filename: file.name || "resume.pdf", content: base64Content }]
           })
         });
 
         if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error(errText); }
-        return new Response("<h1>[SUCCESS] Operator Profile and Credentials Deployed Successfully.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
+        return new Response("<h1>[SUCCESS] Profile and Credentials Deployed.</h1><p><a href='/'>Return to dashboard.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
       } catch (err) { 
-        return new Response("<h1>Credential Ingestion Pipeline Error Node</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
+        return new Response("<h1>Ingestion Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
       }
     }
 
-    // 3. ROUTE: Serve the Complete Visual User Dashboard Application
+    // ==========================================
+    // ROUTE 3: SERVE THE INTEGRAL USER INTERFACE
+    // ==========================================
     const ui = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,7 +125,7 @@ export default {
             <div class="grid">
                 <div class="card"><h3>🛡️ Penetration Testing</h3><p>Simulating adversarial threat behaviors to target, probe, and uncover flaws.</p></div>
                 <div class="card"><h3>⚖️ Compliance Systems</h3><p>Hardening architecture scopes to strictly align with global benchmarks.</p></div>
-                <div class="card"><h3>👁️ Real-Time Telemetry</h3><p>Continuous network node perimeter surveillance and ous payloads instantly.</p></div>
+                <div class="card"><h3>👁️ Real-Time Telemetry</h3><p>Continuous network node perimeter surveillance and anomalous payload isolation.</p></div>
             </div>
             <h3 style="margin:2rem 0 0.5rem 0;color:var(--sec);font-size:1rem;text-transform:uppercase;">Active Gateway Matrix Logs</h3>
             <div class="console">[SYSTEM OK] Okagyeson Perimeter Defensive Shunts Online.<br>[AUDIT] Multi-tier penetration verification frameworks deployed.<br>[READY] Accepting B2B corporate profiles.</div>
@@ -155,7 +150,7 @@ export default {
         </div>
 
         <div id="sec-careers" class="section">
-            <h2 style="margin-bottom:1.5rem;text-align:center;">Global Recruitment Pipeline</h2>
+                    <h2 style="margin-bottom:1.5rem;text-align:center;">Global Recruitment Pipeline</h2>
             <div class="card" style="max-width:600px;margin:0 auto;">
                 <form action="/api/v1/careers/apply" method="POST" enctype="multipart/form-data">
                     <div class="form-group"><label>Full Name</label><input type="text" name="full_name" required></div>
@@ -177,7 +172,6 @@ export default {
             </div>
         </div>
     </main>
-
     <script>
         function showTab(id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -187,8 +181,9 @@ export default {
         }
     </script>
 </body>
-</html>\`;
+</html>`;
 
     return new Response(ui, { headers: { "Content-Type": "text/html; charset=utf-8" } });
   }
 };
+
