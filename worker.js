@@ -3,6 +3,12 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
+    // Fallback security check: reads key globally or from the env context natively
+    const secureKey = (typeof RESEND_API_KEY !== 'undefined') ? RESEND_API_KEY : (env && env.RESEND_API_KEY);
+
+    // ==========================================
+    // ROUTE 1: LEADS/AUDIT REQUEST FORM SUBMISSION
+    // ==========================================
     if (path === "/api/v1/services/request" && request.method === "POST") {
       try {
         const formData = await request.formData();
@@ -10,11 +16,12 @@ export default {
         const corporateEmail = formData.get("corporate_email") || "Not Provided";
         const coverageScope = formData.get("coverage_scope") || "LOCAL";
 
-        // FIXED: Explicitly targeting the true live ://resend.com system node
-        const emailResponse = await fetch("https://://resend.com", {
+        if (!secureKey) throw new Error("Cloudflare Configuration Error: RESEND_API_KEY secret variable is completely inaccessible.");
+
+        const emailResponse = await fetch("https://resend.com", {
           method: "POST",
           headers: {
-            "Authorization": "Bearer " + env.RESEND_API_KEY,
+            "Authorization": "Bearer " + secureKey,
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
@@ -28,11 +35,20 @@ export default {
           })
         });
 
-        if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error("Resend server error: " + errText); }
+        if (!emailResponse.ok) {
+          const errText = await emailResponse.text();
+          throw new Error("Resend server error: " + errText);
+        }
+        
         return new Response("<h1>[SUCCESS] Security Intake Transmission Received.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
-      } catch (err) { return new Response("<h1>Transmission Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html" } }); }
+      } catch (err) { 
+        return new Response("<h1>Transmission Failure Error Node</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
+      }
     }
 
+    // ==========================================
+    // ROUTE 2: CAREERS FORM WITH BINARY PDF ATTACHMENT
+    // ==========================================
     if (path === "/api/v1/careers/apply" && request.method === "POST") {
       try {
         const formData = await request.formData();
@@ -42,18 +58,19 @@ export default {
         const appliedRole = formData.get("applied_role") || "Not Provided";
         const file = formData.get("resume");
 
+        if (!secureKey) throw new Error("Cloudflare Configuration Error: RESEND_API_KEY secret variable is completely inaccessible.");
+
         if (!file || !(file instanceof File) || file.size === 0) {
-          return new Response("<h1>Submission Error</h1><p>Missing credentials attachment element. A PDF file upload is mandatory.</p>", { status: 400, headers: { "Content-Type": "text/html" } });
+          return new Response("<h1>Submission Error</h1><p>Missing credentials attachment element. A PDF file upload is mandatory.</p>", { status: 400, headers: { "Content-Type": "text/html; charset=utf-8" } });
         }
 
         const fileBuffer = await file.arrayBuffer();
         const base64Content = btoa(String.fromCharCode(...new Uint8Array(fileBuffer)));
 
-        // FIXED: Explicitly targeting the true live ://resend.com system node
-        const emailResponse = await fetch("https://://resend.com", {
+        const emailResponse = await fetch("https://resend.com", {
           method: "POST",
           headers: {
-            "Authorization": "Bearer " + env.RESEND_API_KEY,
+            "Authorization": "Bearer " + secureKey,
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
@@ -69,11 +86,20 @@ export default {
           })
         });
 
-        if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error("Resend server error: " + errText); }
+        if (!emailResponse.ok) {
+          const errText = await emailResponse.text();
+          throw new Error("Resend server error: " + errText);
+        }
+
         return new Response("<h1>[SUCCESS] Operator Profile and Credentials Deployed Successfully.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
-      } catch (err) { return new Response("<h1>Credential Ingestion Pipeline Error</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html" } }); }
+      } catch (err) { 
+        return new Response("<h1>Credential Ingestion Pipeline Error Node</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
+      }
     }
 
+    // ==========================================
+    // ROUTE 3: SERVE THE INTEGRAL USER INTERFACE
+    // ==========================================
     const ui = \`<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -199,4 +225,3 @@ export default {
     });
   }
 };
-
