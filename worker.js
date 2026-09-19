@@ -4,9 +4,7 @@ export default {
     const path = url.pathname;
     const secureKey = env.RESEND_API_KEY;
 
-    // ==========================================
-    // ROUTE 1: LEADS/AUDIT REQUEST FORM SUBMISSION
-    // ==========================================
+    // 1. ROUTE: Technical Service Consultation Requests
     if (path === "/api/v1/services/request" && request.method === "POST") {
       try {
         const formData = await request.formData();
@@ -21,20 +19,16 @@ export default {
             from: "onboarding@resend.dev",
             to: "kofiagyei79@gmail.com",
             subject: "🚨 New Audit Request from " + companyName,
-            html: "<h3>Okagyeson Defense Network Intake Alert</h3><p><strong>Company Name:</strong> " + companyName + "</p><p><strong>Corporate Email:</strong> " + corporateEmail + "</p><p><strong>Coverage Scope Target:</strong> " + coverageScope + "</p>"
+            html: "<h3>Okagyeson Defense Network Intake Alert</h3><p><strong>Company:</strong> " + companyName + "</p><p><strong>Email:</strong> " + corporateEmail + "</p><p><strong>Scope:</strong> " + coverageScope + "</p>"
           })
         });
 
         if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error(errText); }
         return new Response("<h1>[SUCCESS] Security Intake Received.</h1><p><a href='/'>Return to dashboard.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
-      } catch (err) { 
-        return new Response("<h1>Transmission Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
-      }
+      } catch (err) { return new Response("<h1>Transmission Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); }
     }
 
-    // ==========================================
-    // ROUTE 2: CAREERS FORM WITH BINARY PDF ATTACHMENT
-    // ==========================================
+    // 2. ROUTE: Careers Application System Ingest with Attached PDF Document
     if (path === "/api/v1/careers/apply" && request.method === "POST") {
       try {
         const formData = await request.formData();
@@ -58,21 +52,17 @@ export default {
             from: "onboarding@resend.dev",
             to: "kofiagyei79@gmail.com",
             subject: "💼 New Candidate Application: " + appliedRole,
-            html: "<h3>New Ingestion Event</h3><p><strong>Operator Name:</strong> " + fullName + "</p><p><strong>Contact Email:</strong> " + email + "</p><p><strong>Deployment Region:</strong> " + targetRegion + "</p><p><strong>Applied Role:</strong> " + appliedRole + "</p>",
+            html: "<h3>New Ingestion Event</h3><p><strong>Operator:</strong> " + fullName + "</p><p><strong>Email:</strong> " + email + "</p><p><strong>Region:</strong> " + targetRegion + "</p><p><strong>Role:</strong> " + appliedRole + "</p>",
             attachments: [{ filename: file.name || "resume.pdf", content: base64Content }]
           })
         });
 
         if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error(errText); }
-        return new Response("<h1>[SUCCESS] Profile and Credentials Deployed.</h1><p><a href='/'>Return to dashboard.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
-      } catch (err) { 
-        return new Response("<h1>Ingestion Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
-      }
+        return new Response("<h1>[SUCCESS] Profile Deployed.</h1><p><a href='/'>Return to dashboard.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
+      } catch (err) { return new Response("<h1>Ingestion Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); }
     }
 
-    // ==========================================
-    // ROUTE 3: SERVE THE INTEGRAL USER INTERFACE
-    // ==========================================
+    // 3. ROUTE: Serve the Complete Visual User Dashboard Application
     const ui = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,11 +87,9 @@ export default {
         .card h3{color:var(--blue);font-size:1.1rem;margin-bottom:0.75rem;}
         .card.cred h3{color:var(--gold);}
         .card p{font-size:0.95rem;color:var(--sec);line-height:1.5;}
-        .console{background:#020617;border:1px solid var(--border);border-radius:8px;padding:1rem;font-family:monospace;font-size:0.85rem;height:180px;overflow-y:auto;color:#38bdf8;line-height:1.6;margin-top:1rem;}
         .form-group{margin-bottom:1.25rem;}
         .form-group label{display:block;margin-bottom:0.5rem;color:var(--sec);font-size:0.9rem;}
         .form-group input,.form-group select{width:100%;padding:0.75rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:#fff;font-size:1rem;}
-        .form-group input[type="file"]{padding:0.5rem;background:var(--bg);border:1px dashed var(--border);color:var(--sec);cursor:pointer;}
     </style>
 </head>
 <body>
@@ -127,8 +115,6 @@ export default {
                 <div class="card"><h3>⚖️ Compliance Systems</h3><p>Hardening architecture scopes to strictly align with global benchmarks.</p></div>
                 <div class="card"><h3>👁️ Real-Time Telemetry</h3><p>Continuous network node perimeter surveillance and anomalous payload isolation.</p></div>
             </div>
-            <h3 style="margin:2rem 0 0.5rem 0;color:var(--sec);font-size:1rem;text-transform:uppercase;">Active Gateway Matrix Logs</h3>
-            <div class="console">[SYSTEM OK] Okagyeson Perimeter Defensive Shunts Online.<br>[AUDIT] Multi-tier penetration verification frameworks deployed.<br>[READY] Accepting B2B corporate profiles.</div>
         </div>
 
         <div id="sec-intake" class="section">
@@ -150,7 +136,7 @@ export default {
         </div>
 
         <div id="sec-careers" class="section">
-                    <h2 style="margin-bottom:1.5rem;text-align:center;">Global Recruitment Pipeline</h2>
+            <h2 style="margin-bottom:1.5rem;text-align:center;">Global Recruitment Pipeline</h2>
             <div class="card" style="max-width:600px;margin:0 auto;">
                 <form action="/api/v1/careers/apply" method="POST" enctype="multipart/form-data">
                     <div class="form-group"><label>Full Name</label><input type="text" name="full_name" required></div>
@@ -163,7 +149,7 @@ export default {
                         </select>
                     </div>
                     <div class="form-group"><label>Applied Operational Role</label><input type="text" name="applied_role" placeholder="e.g. SOC Analyst, Security Engineer" required></div>
-                    <div class="form-group">
+                                        <div class="form-group">
                         <label>Operational Credentials / Resume (PDF Only)</label>
                         <input type="file" name="resume" accept=".pdf" required>
                     </div>
@@ -181,7 +167,7 @@ export default {
         }
     </script>
 </body>
-</html>`;
+</html>\`;
 
     return new Response(ui, { headers: { "Content-Type": "text/html; charset=utf-8" } });
   }
