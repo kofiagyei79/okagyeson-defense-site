@@ -123,7 +123,7 @@ export default {
                 <h1 style="font-size:2.2rem;margin-bottom:0.5rem;">Enterprise Defensive Cyber Capabilities</h1>
                 <p style="color:var(--sec);">Operational Excellence in High-Compliance Digital Warfare Countermeasures</p>
             </div>
-             <div class="grid">
+            <div class="grid">
                 <div class="card"><h3>🛡️ Ethical Penetration Testing</h3><p>Simulating cutting-edge adversarial threat behaviors to target, probe, and uncover hidden structural flaws before malicious operators exploit them. Comprehensive black-box and white-box offensive testing matrices.</p></div>
                 <div class="card"><h3>⚖️ Regulatory Compliance Systems</h3><p>Hardening network infrastructure scopes to strictly align with global data protection criteria benchmarks. Auditing frameworks for cross-border transmission security protocols.</p></div>
                 <div class="card"><h3>👁️ Real-Time SOC Telemetry</h3><p>Continuous network node perimeter surveillance. Intercepting intercontinental traffic flows to isolate, contain, and neutralize anomalous payloads instantly.</p></div>
@@ -150,4 +150,53 @@ export default {
                     <div class="form-group"><label>Coverage Target Tier</label>
                         <select name="coverage_scope">
                             <option value="LOCAL">Ethical Pentesting Scan (Local)</option>
-                            <option value="REGIONAL">Full Infrastructure Compliance Review</option> 
+                            <option value="REGIONAL">Full Infrastructure Compliance Review</option>
+                            <option value="INTERCONTINENTAL">Global SOC Telemetry Deployment</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%;padding:0.75rem;font-weight:bold;">Transmit Intake Profile</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="sec-careers" class="section">
+            <h2 style="margin-bottom:1.5rem;text-align:center;">Global Recruitment Pipeline</h2>
+            <div class="card" style="max-width:600px;margin:0 auto;">
+                <form action="/api/v1/careers/apply" method="POST" enctype="multipart/form-data">
+                    <div class="form-group"><label>Full Name</label><input type="text" name="full_name" required></div>
+                    <div class="form-group"><label>Email Address</label><input type="email" name="email" required></div>
+                    <div class="form-group"><label>Target Deployment Region</label>
+                        <select name="target_region">
+                            <option value="GLOBAL">Global Node Matrix</option>
+                            <option value="NORTH_AMERICA">North America Perimeter</option>
+                            <option value="EUROPE">EMEA Systems</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Applied Operational Role</label><input type="text" name="applied_role" placeholder="e.g. SOC Analyst, Security Engineer" required></div>
+                    <div class="form-group">
+                        <label>Operational Credentials / Resume (PDF Only)</label>
+                        <input type="file" name="resume" accept=".pdf" required>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%;padding:0.75rem;font-weight:bold;">Submit Operational Profile</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showTab(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            document.getElementById('sec-' + id).classList.add('active');
+            document.getElementById('link-' + id).classList.add('active');
+        }
+    </script>
+</body>
+</html>\`;
+
+    return new Response(ui, {
+      headers: { "Content-Type": "text/html; charset=utf-8" }
+    });
+  }
+};
+
