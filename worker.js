@@ -22,7 +22,8 @@ export default {
           },
           body: JSON.stringify({
             from: "onboarding@resend.dev",
-            to: "info@okagyesondefense.io", 
+            to: to: "kofiagyei79@gmail.com",
+ 
             subject: `🚨 New Security Audit Request from ${companyName}`,
             html: `
               <h3>Okagyeson Defense Network Intake Alert</h3>
@@ -75,7 +76,8 @@ export default {
           },
           body: JSON.stringify({
             from: "onboarding@resend.dev",
-            to: "info@okagyesondefense.io",
+            to: to: "kofiagyei79@gmail.com",
+
             subject: `💼 New Candidate Application: ${appliedRole}`,
             html: `
               <h3>New System Operator Application Ingested</h3>
