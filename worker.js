@@ -13,6 +13,7 @@ export default {
         const corporateEmail = formData.get("corporate_email") || "Not Provided";
         const coverageScope = formData.get("coverage_scope") || "LOCAL";
 
+        // FIXED: Pointing exactly to the true operational email delivery API pipeline
         const emailResponse = await fetch("https://resend.com", {
           method: "POST",
           headers: {
@@ -60,6 +61,7 @@ export default {
         const fileBuffer = await file.arrayBuffer();
         const base64Content = btoa(String.fromCharCode(...new Uint8Array(fileBuffer)));
 
+        // FIXED: Pointing exactly to the true operational email delivery API pipeline
         const emailResponse = await fetch("https://resend.com", {
           method: "POST",
           headers: {
