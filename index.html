@@ -244,30 +244,124 @@
                 </div>
                 <div class="service-card">
                     <h3>Regulatory Compliance</h3>
-                    <p>Comprehensive auditing and mapping structures tailored specifically for healthcare environments requiring strict HIPAA data access compliance and supply chain security frameworks.</p>
+                    <p>Comprehensive auditing and mapping structures tailored specifically for environments requiring strict HIPAA data access controls, NIST SP 800-171 protections, and corporate logistics pipeline visibility metrics.</p>
                 </div>
                 <div class="service-card">
                     <h3>Incident Response</h3>
-                    <p>Fast containment strategies built to isolate threat actors instantly, preserve volatile RAM evidence, and systematically eliminate persistence within compromised network environments.</p>
+                    <p>Delivering isolated containment strategies, threat eradication workflows, and comprehensive system reconstruction routines to rapidly counter operational disruption events.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Technical Deployments & Architecture Section -->
+        <!-- SOC Architecture Section -->
         <section id="architecture" class="architecture-section">
-            <h2 style="text-align: center; color: var(--primary); margin-bottom: 4px;">Technical Deployments & Proven Architecture</h2>
-            <p style="text-align: center; color: #64748b; margin-bottom: 40px;">Validated system configurations engineered to industry standards.</p>
+            <h2 style="text-align: center; color: var(--primary); margin-bottom: 4px;">SOC Reference Architecture</h2>
+            <p style="text-align: center; color: #64748b; margin-bottom: 40px;">Open-source engineering frameworks designed for high availability and deep network inspection.</p>
 
             <div class="arch-card">
-                <h3>1. Enterprise Hybrid SOC Architecture</h3>
-                <div class="arch-meta">Architecture & Tools: EVE-NG, pfSense Firewall Gateway, Splunk Enterprise SIEM</div>
-                <p>Configured a centralized pfSense gateway to segment a corporate topology into LAN, DMZ, and Management zones. Deployed Splunk Universal Forwarders across virtual endpoints to aggregate data and author automated dashboards filtering for privilege escalation vectors.</p>
+                <h3>Scalable Defensive SIEM Infrastructure</h3>
+                <div class="arch-meta">Core Environment: Linux (Ubuntu Server LTS) & Open-Source Security Tools</div>
+                <p>Engineered a distributed Security Information and Event Management (SIEM) environment capable of parsing multi-source log pipelines. The deployment manages ingestion nodes, structured log indexing, and dynamic dashboard creation for live traffic analysis.</p>
                 <div>
-                    <span class="tools-badge">EVE-NG</span>
-                    <span class="tools-badge">pfSense</span>
-                    <span class="tools-badge">Splunk Enterprise</span>
+                    <span class="tools-badge">Wazuh</span>
+                    <span class="tools-badge">Elasticsearch</span>
+                    <span class="tools-badge">Filebeat</span>
+                    <span class="tools-badge">Logstash</span>
+                    <span class="tools-badge">Kibana</span>
                 </div>
             </div>
 
             <div class="arch-card">
-                <h3>2. Regulatory Compliance Auditing & PHI Access Controls</h3>
+                            <div class="arch-card">
+                <h3>Deep Packet Inspection & Network Intrusion Detection (IDS)</h3>
+                <div class="arch-meta">Core Environment: Network Boundary Mirroring & Aggregation</div>
+                <p>Designed a live network monitoring topology utilizing deep packet inspection (DPI) rulesets. The architecture hooks directly into internal network switches via port mirroring to capture raw PCAPs, perform signature matching, and trigger alerts on lateral movement or anomalous beaconing behavior.</p>
+                <div>
+                    <span class="tools-badge">Zeek (Bro)</span>
+                    <span class="tools-badge">Suricata</span>
+                    <span class="tools-badge">Wireshark</span>
+                    <span class="tools-badge">pfSense</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portals & Forms Section -->
+        <section id="portal-section">
+            <div class="forms-grid">
+                
+                <!-- Client Portal Form -->
+                <div class="form-section">
+                    <h2 style="color: var(--primary); margin-top:0;">Secure Client Portal</h2>
+                    <p style="color: #64748b; font-size: 14px; margin-bottom: 25px;">Registered clients can submit encrypted intake tickets directly to our security operations queue.</p>
+                    <form action="/api/v1/services/request" method="POST">
+                        <div class="form-group">
+                            <label for="client-name">Company Name</label>
+                            <input type="text" id="client-name" name="company_name" placeholder="Example Enterprises LLC" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="client-email">Corporate Email</label>
+                            <input type="email" id="client-email" name="email" placeholder="security@yourcompany.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ticket-severity">Incident Severity Level</label>
+                            <select id="ticket-severity" name="severity">
+                                <option value="low">Low - Routine Compliance/Audit Inquiry</option>
+                                <option value="medium">Medium - Anomalous Alert Verification Required</option>
+                                <option value="high">High - Active Operational Degradation or Suspected Breaches</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ticket-details">Context & System Log Excerpts</label>
+                            <textarea id="ticket-details" name="details" rows="5" placeholder="Provide system environment details, affected IP addresses, or observable symptoms..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Submit Encrypted Ticket</button>
+                    </form>
+                </div>
+
+                <!-- Careers Application Form -->
+                <div class="form-section">
+                    <h2 style="color: var(--primary); margin-top:0;">Join the Defense Grid</h2>
+                    <p style="color: #64748b; font-size: 14px; margin-bottom: 25px;">Looking to apply your engineering background? Submit your profile to our talent registry.</p>
+                    <form action="/api/v1/careers/apply" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="applicant-name">Full Legal Name</label>
+                            <input type="text" id="applicant-name" name="full_name" placeholder="Jane Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="applicant-email">Primary Email Address</label>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="primary-skill">Primary Technical Competency</label>
+                            <select id="primary-skill" name="primary_skill">
+                                <option value="siem-engineering">SIEM Architecture & Pipeline Engineering</option>
+                                <option value="dfir">Digital Forensics & Incident Response (DFIR)</option>
+                                <option value="cloud-security">Cloud Security Architecture (AWS / Azure)</option>
+                                <option value="compliance">Governance, Risk, & Compliance (GRC)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="applicant-bio">Professional Background Summary</label>
+                            <textarea id="applicant-bio" name="bio" rows="5" placeholder="Outline your hands-on experience, lab achievements, certifications, or preferred tooling stacks..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="resume-upload">Upload Resume Material (PDF Format Required)</label>
+                            <input type="file" id="resume-upload" name="resume" accept="application/pdf" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box; font-size: 16px; background-color: #ffffff; color: #1e293b;">
+                        </div>
+                        <button type="submit" class="submit-btn">Submit Profile Application</button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Okagyeson Cyber Defense LLC. All rights reserved.</p>
+        <p style="font-size: 12px; color: #64748b; margin-top: 10px;">Operational Continuity | Threat Suppression | Infrastructure Visibility</p>
+    </footer>
+
+</body>
+</html>
+
