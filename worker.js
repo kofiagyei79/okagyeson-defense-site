@@ -13,7 +13,6 @@ export default {
         const corporateEmail = formData.get("corporate_email") || "Not Provided";
         const coverageScope = formData.get("coverage_scope") || "LOCAL";
 
-        // FIXED: Correct live endpoint API destination
         const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
@@ -22,8 +21,7 @@ export default {
           },
           body: JSON.stringify({
             from: "onboarding@resend.dev",
-            to: to: "kofiagyei79@gmail.com",
- 
+            to: "kofiagyei79@gmail.com", // FIXED: Duplicate word removed
             subject: `🚨 New Security Audit Request from ${companyName}`,
             html: `
               <h3>Okagyeson Defense Network Intake Alert</h3>
@@ -61,13 +59,11 @@ export default {
           return new Response("Error: Missing credentials attachment element. A PDF file upload is mandatory.", { status: 400 });
         }
 
-        // Convert the uploaded PDF file content stream into a base64 string
         const fileBuffer = await file.arrayBuffer();
         const base64Content = btoa(
           String.fromCharCode(...new Uint8Array(fileBuffer))
         );
 
-        // FIXED: Correct live endpoint API destination
         const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
@@ -76,8 +72,7 @@ export default {
           },
           body: JSON.stringify({
             from: "onboarding@resend.dev",
-            to: to: "kofiagyei79@gmail.com",
-
+            to: "kofiagyei79@gmail.com", // FIXED: Duplicate word removed
             subject: `💼 New Candidate Application: ${appliedRole}`,
             html: `
               <h3>New System Operator Application Ingested</h3>
