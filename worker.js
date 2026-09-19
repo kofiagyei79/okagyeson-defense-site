@@ -16,18 +16,18 @@ export default {
         const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${env.RESEND_API_KEY}`,
+            "Authorization": `Bearer \${env.RESEND_API_KEY}`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
             from: "onboarding@resend.dev",
-            to: "kofiagyei79@gmail.com", // FIXED: Duplicate word removed
-            subject: `🚨 New Security Audit Request from ${companyName}`,
+            to: "kofiagyei79@gmail.com",
+            subject: `🚨 New Security Audit Request from \${companyName}`,
             html: `
               <h3>Okagyeson Defense Network Intake Alert</h3>
-              <p><strong>Company Name:</strong> ${companyName}</p>
-              <p><strong>Corporate Email:</strong> ${corporateEmail}</p>
-              <p><strong>Coverage Scope Target:</strong> ${coverageScope}</p>
+              <p><strong>Company Name:</strong> \${companyName}</p>
+              <p><strong>Corporate Email:</strong> \${corporateEmail}</p>
+              <p><strong>Coverage Scope Target:</strong> \${coverageScope}</p>
             `
           })
         });
@@ -39,7 +39,7 @@ export default {
           headers: { "Content-Type": "text/html; charset=utf-8" }
         });
       } catch (err) { 
-        return new Response(`<h1>Transmission Failure</h1><p>${err.message}</p>`, { status: 500, headers: { "Content-Type": "text/html" } }); 
+        return new Response(`<h1>Transmission Failure</h1><p>\${err.message}</p>`, { status: 500, headers: { "Content-Type": "text/html" } }); 
       }
     }
 
@@ -67,19 +67,19 @@ export default {
         const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${env.RESEND_API_KEY}`,
+            "Authorization": `Bearer \${env.RESEND_API_KEY}`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
             from: "onboarding@resend.dev",
-            to: "kofiagyei79@gmail.com", // FIXED: Duplicate word removed
-            subject: `💼 New Candidate Application: ${appliedRole}`,
+            to: "kofiagyei79@gmail.com",
+            subject: `💼 New Candidate Application: \${appliedRole}`,
             html: `
               <h3>New System Operator Application Ingested</h3>
-              <p><strong>Operator Name:</strong> ${fullName}</p>
-              <p><strong>Contact Email:</strong> ${email}</p>
-              <p><strong>Deployment Region:</strong> ${targetRegion}</p>
-              <p><strong>Applied Operational Role:</strong> ${appliedRole}</p>
+              <p><strong>Operator Name:</strong> \${fullName}</p>
+              <p><strong>Contact Email:</strong> \${email}</p>
+              <p><strong>Deployment Region:</strong> \${targetRegion}</p>
+              <p><strong>Applied Operational Role:</strong> \${appliedRole}</p>
               <p>The candidate's original PDF file credentials are compiled and attached below.</p>
             `,
             attachments: [
@@ -98,7 +98,7 @@ export default {
           headers: { "Content-Type": "text/html; charset=utf-8" }
         });
       } catch (err) { 
-        return new Response(`<h1>Credential Ingestion Pipeline Error</h1><p>${err.message}</p>`, { status: 500, headers: { "Content-Type": "text/html" } }); 
+        return new Response(`<h1>Credential Ingestion Pipeline Error</h1><p>\${err.message}</p>`, { status: 500, headers: { "Content-Type": "text/html" } }); 
       }
     }
 
@@ -153,9 +153,6 @@ export default {
             <div style="margin-bottom:2rem;text-align:center;">
                 <h1 style="font-size:2.2rem;margin-bottom:0.5rem;">Enterprise Defensive Cyber Capabilities</h1>
                 <p style="color:var(--sec);">Operational Excellence in High-Compliance Digital Warfare Countermeasures</p>
-            </div>
-            <div class="grid">
-             measures</p>
             </div>
             <div class="grid">
                 <div class="card"><h3>🛡️ Ethical Penetration Testing</h3><p>Simulating cutting-edge adversarial threat behaviors to target, probe, and uncover hidden structural flaws before malicious operators exploit them. Comprehensive black-box and white-box offensive testing matrices.</p></div>
@@ -233,4 +230,3 @@ export default {
     });
   }
 };
-   
