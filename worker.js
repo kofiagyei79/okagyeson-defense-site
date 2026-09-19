@@ -3,7 +3,7 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // Fallback security check: reads key globally or from the env context natively
+    // Fallback key resolver context logic
     const secureKey = (typeof RESEND_API_KEY !== 'undefined') ? RESEND_API_KEY : (env && env.RESEND_API_KEY);
 
     // ==========================================
@@ -16,7 +16,7 @@ export default {
         const corporateEmail = formData.get("corporate_email") || "Not Provided";
         const coverageScope = formData.get("coverage_scope") || "LOCAL";
 
-        if (!secureKey) throw new Error("Cloudflare Configuration Error: RESEND_API_KEY secret variable is completely inaccessible.");
+        if (!secureKey) throw new Error("Cloudflare Configuration Error: RESEND_API_KEY variable is inaccessible.");
 
         const emailResponse = await fetch("https://resend.com", {
           method: "POST",
@@ -35,15 +35,9 @@ export default {
           })
         });
 
-        if (!emailResponse.ok) {
-          const errText = await emailResponse.text();
-          throw new Error("Resend server error: " + errText);
-        }
-        
+        if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error("Resend server error: " + errText); }
         return new Response("<h1>[SUCCESS] Security Intake Transmission Received.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
-      } catch (err) { 
-        return new Response("<h1>Transmission Failure Error Node</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
-      }
+      } catch (err) { return new Response("<h1>Transmission Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); }
     }
 
     // ==========================================
@@ -58,7 +52,7 @@ export default {
         const appliedRole = formData.get("applied_role") || "Not Provided";
         const file = formData.get("resume");
 
-        if (!secureKey) throw new Error("Cloudflare Configuration Error: RESEND_API_KEY secret variable is completely inaccessible.");
+        if (!secureKey) throw new Error("Cloudflare Configuration Error: RESEND_API_KEY variable is inaccessible.");
 
         if (!file || !(file instanceof File) || file.size === 0) {
           return new Response("<h1>Submission Error</h1><p>Missing credentials attachment element. A PDF file upload is mandatory.</p>", { status: 400, headers: { "Content-Type": "text/html; charset=utf-8" } });
@@ -86,15 +80,9 @@ export default {
           })
         });
 
-        if (!emailResponse.ok) {
-          const errText = await emailResponse.text();
-          throw new Error("Resend server error: " + errText);
-        }
-
+        if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error("Resend server error: " + errText); }
         return new Response("<h1>[SUCCESS] Operator Profile and Credentials Deployed Successfully.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
-      } catch (err) { 
-        return new Response("<h1>Credential Ingestion Pipeline Error Node</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
-      }
+      } catch (err) { return new Response("<h1>Credential Ingestion Pipeline Error Node</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); }
     }
 
     // ==========================================
