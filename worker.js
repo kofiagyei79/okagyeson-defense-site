@@ -3,9 +3,7 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // ==========================================
-    // ROUTE 1: LEADS/AUDIT REQUEST FORM SUBMISSION
-    // ==========================================
+    // 1. ROUTE: Technical Service Consultation Requests
     if (path === "/api/v1/services/request" && request.method === "POST") {
       try {
         const formData = await request.formData();
@@ -13,39 +11,31 @@ export default {
         const corporateEmail = formData.get("corporate_email") || "Not Provided";
         const coverageScope = formData.get("coverage_scope") || "LOCAL";
 
-        const emailResponse = await fetch("https://api.resend.com/emails", {
+        const emailResponse = await fetch("https://resend.com", {
           method: "POST",
           headers: {
-            "Authorization": `Bearer \${env.RESEND_API_KEY}`,
+            "Authorization": "Bearer " + env.RESEND_API_KEY,
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
             from: "onboarding@resend.dev",
             to: "kofiagyei79@gmail.com",
-            subject: `🚨 New Security Audit Request from \${companyName}`,
-            html: `
-              <h3>Okagyeson Defense Network Intake Alert</h3>
-              <p><strong>Company Name:</strong> \${companyName}</p>
-              <p><strong>Corporate Email:</strong> \${corporateEmail}</p>
-              <p><strong>Coverage Scope Target:</strong> \${coverageScope}</p>
-            `
+            subject: "🚨 New Audit Request from " + companyName,
+            html: `<h3>Okagyeson Defense Network Intake Alert</h3>
+                   <p><strong>Company Name:</strong> \${companyName}</p>
+                   <p><strong>Corporate Email:</strong> \${corporateEmail}</p>
+                   <p><strong>Coverage Scope Target:</strong> \${coverageScope}</p>`
           })
         });
 
-        if (!emailResponse.ok) throw new Error("Mail engine rejected request");
-
-        return new Response("<h1>[SUCCESS] Security Intake Transmission Received.</h1><p><a href='/'>Click here to return to dashboard node.</a></p>", { 
-          status: 200,
-          headers: { "Content-Type": "text/html; charset=utf-8" }
-        });
+        if (!emailResponse.ok) throw new Error("Mail engine rejected delivery request");
+        return new Response("<h1>[SUCCESS] Security Intake Transmission Received.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
       } catch (err) { 
-        return new Response(`<h1>Transmission Failure</h1><p>\${err.message}</p>`, { status: 500, headers: { "Content-Type": "text/html" } }); 
+        return new Response("<h1>Transmission Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html" } }); 
       }
     }
 
-    // ==========================================
-    // ROUTE 2: CAREERS FORM WITH BINARY PDF ATTACHMENT
-    // ==========================================
+    // 2. ROUTE: Careers Application System Ingest with Attached PDF Document
     if (path === "/api/v1/careers/apply" && request.method === "POST") {
       try {
         const formData = await request.formData();
@@ -60,51 +50,35 @@ export default {
         }
 
         const fileBuffer = await file.arrayBuffer();
-        const base64Content = btoa(
-          String.fromCharCode(...new Uint8Array(fileBuffer))
-        );
+        const base64Content = btoa(String.fromCharCode(...new Uint8Array(fileBuffer)));
 
-        const emailResponse = await fetch("https://api.resend.com/emails", {
+        const emailResponse = await fetch("https://resend.com", {
           method: "POST",
           headers: {
-            "Authorization": `Bearer \${env.RESEND_API_KEY}`,
+            "Authorization": "Bearer " + env.RESEND_API_KEY,
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
             from: "onboarding@resend.dev",
             to: "kofiagyei79@gmail.com",
-            subject: `💼 New Candidate Application: \${appliedRole}`,
-            html: `
-              <h3>New System Operator Application Ingested</h3>
-              <p><strong>Operator Name:</strong> \${fullName}</p>
-              <p><strong>Contact Email:</strong> \${email}</p>
-              <p><strong>Deployment Region:</strong> \${targetRegion}</p>
-              <p><strong>Applied Operational Role:</strong> \${appliedRole}</p>
-              <p>The candidate's original PDF file credentials are compiled and attached below.</p>
-            `,
-            attachments: [
-              {
-                filename: file.name || "resume.pdf",
-                content: base64Content
-              }
-            ]
+            subject: "💼 New Candidate Application: " + appliedRole,
+            html: `<h3>New System Operator Application Ingested</h3>
+                   <p><strong>Operator Name:</strong> \${fullName}</p>
+                   <p><strong>Contact Email:</strong> \${email}</p>
+                   <p><strong>Deployment Region:</strong> \${targetRegion}</p>
+                   <p><strong>Applied Operational Role:</strong> \${appliedRole}</p>`,
+            attachments: [{ filename: file.name || "resume.pdf", content: base64Content }]
           })
         });
 
-        if (!emailResponse.ok) throw new Error("Mail engine rejected request");
-
-        return new Response("<h1>[SUCCESS] Operator Profile and Credentials Deployed Successfully.</h1><p><a href='/'>Click here to return to dashboard node.</a></p>", { 
-          status: 200, 
-          headers: { "Content-Type": "text/html; charset=utf-8" }
-        });
+        if (!emailResponse.ok) throw new Error("Mail engine rejected transmission request");
+        return new Response("<h1>[SUCCESS] Operator Profile and Credentials Deployed Successfully.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
       } catch (err) { 
-        return new Response(`<h1>Credential Ingestion Pipeline Error</h1><p>\${err.message}</p>`, { status: 500, headers: { "Content-Type": "text/html" } }); 
+        return new Response("<h1>Credential Ingestion Pipeline Error</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html" } }); 
       }
     }
 
-    // ==========================================
-    // ROUTE 3: SERVE THE INTEGRAL USER INTERFACE
-    // ==========================================
+    // 3. ROUTE: Serve the Complete Visual User Dashboard Application
     const ui = `<!DOCTYPE html>
 <html lang="en">
 <head>
