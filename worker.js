@@ -14,6 +14,7 @@ export default {
 
         const emailResponse = await fetch("https://resend.com", {
 
+
           method: "POST",
           headers: { "Authorization": "Bearer " + secureKey, "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -52,6 +53,7 @@ export default {
         const base64Content = btoa(String.fromCharCode(...new Uint8Array(fileBuffer)));
 
         const emailResponse = await fetch("https://resend.com", {
+
 
           method: "POST",
           headers: { "Authorization": "Bearer " + secureKey, "Content-Type": "application/json" },
