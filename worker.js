@@ -121,6 +121,15 @@ export default {
                 <div class="card cred"><h3>🔑 Operational Clearances</h3><p><strong>Secure Cloud Perimeter Access Authority</strong><br>Authorized administration privileges across cloud-native application network switches, secure API gateways, and distributed clusters.</p></div>
             </div>
             <h3 style="margin:2rem 0 0.5rem 0;color:var(--sec);font-size:1rem;text-transform:uppercase;">Active Gateway Matrix Logs</h3>
+ode perimeter surveillance. Intercepting traffic flows to isolate, contain, and neutralize anomalous payloads instantly.</p></div>
+            </div>
+            <div style="margin:3rem 0 1.5rem 0;text-align:center;"><h2 style="font-size:1.8rem;margin-bottom:0.5rem;">Verified Operator Credentials & Qualifications</h2><p style="color:var(--sec);">Certified Cybersecurity Expertise Mapping Internationally Recognized Standards</p></div>
+            <div class="grid">
+                <div class="card cred"><h3>🎓 Professional Education</h3><p><strong>BSc in Cybersecurity & Network Engineering</strong><br>Rigorous academic specialization in safe code architectures, advanced data traffic parsing, system hardening, and cryptography.</p></div>
+                <div class="card cred"><h3>🏅 Technical Certifications</h3><p><strong>Certified Defensive Infrastructure Operator</strong><br>Validated mastery across enterprise packet inspection pipeline controls, threat countermeasure execution, and regulatory compliance.</p></div>
+                <div class="card cred"><h3>🔑 Operational Clearances</h3><p><strong>Secure Cloud Perimeter Access Authority</strong><br>Authorized administration privileges across cloud-native application network switches, secure API gateways, and distributed clusters.</p></div>
+            </div>
+            <h3 style="margin:2rem 0 0.5rem 0;color:var(--sec);font-size:1rem;text-transform:uppercase;">Active Gateway Matrix Logs</h3>
             <div class="console">[SYSTEM OK] Okagyeson Perimeter Defensive Shunts Online.<br>[AUDIT] Multi-tier penetration verification frameworks fully deployed.<br>[VERIFIED] Operator credential matrix loaded successfully.<br>[READY] Accepting global B2B corporate assessment profiles.</div>
         </div>
 
