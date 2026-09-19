@@ -13,11 +13,11 @@ export default {
         const corporateEmail = formData.get("corporate_email") || "Not Provided";
         const coverageScope = formData.get("coverage_scope") || "LOCAL";
 
-        // FIXED: Now hitting the correct live endpoint ://resend.com
-        const emailResponse = await fetch("https://://resend.com", {
+        // FIXED: Correct live endpoint API destination
+        const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${env.RESEND_API_KEY}`, // FIXED: Using secure environment variable
+            "Authorization": `Bearer ${env.RESEND_API_KEY}`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
@@ -66,11 +66,11 @@ export default {
           String.fromCharCode(...new Uint8Array(fileBuffer))
         );
 
-        // FIXED: Now hitting the correct live endpoint ://resend.com
-        const emailResponse = await fetch("https://://resend.com", {
+        // FIXED: Correct live endpoint API destination
+        const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${env.RESEND_API_KEY}`, // FIXED: Using secure environment variable
+            "Authorization": `Bearer ${env.RESEND_API_KEY}`,
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
@@ -166,7 +166,7 @@ export default {
                 <h2 style="font-size:1.8rem;margin-bottom:0.5rem;">Verified Operator Credentials & Qualifications</h2>
                 <p style="color:var(--sec);">Certified Cybersecurity Expertise Mapping Internationally Recognized Standards</p>
             </div>
-                        <div class="grid">
+            <div class="grid">
                 <div class="card cred"><h3>🎓 Professional Education</h3><p><strong>BSc in Cybersecurity & Network Engineering</strong><br>Rigorous academic specialization in safe code architectures, advanced data traffic parsing, structural system hardening, and secure cryptography operations.</p></div>
                 <div class="card cred"><h3>🏅 Technical Certifications</h3><p><strong>Certified Defensive Infrastructure Operator</strong><br>Validated mastery across enterprise packet inspection pipeline controls, threat countermeasure execution, and regulatory compliance mapping models.</p></div>
                 <div class="card cred"><h3>🔑 Operational Clearances</h3><p><strong>Secure Cloud Perimeter Access Authority</strong><br>Authorized administration privileges across cloud-native application network switches, secure API key gateways, and distributed database cluster layers.</p></div>
@@ -233,4 +233,3 @@ export default {
     });
   }
 };
-
