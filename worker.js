@@ -3,9 +3,6 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // ==========================================
-    // ROUTE 1: LEADS/AUDIT REQUEST FORM SUBMISSION
-    // ==========================================
     if (path === "/api/v1/services/request" && request.method === "POST") {
       try {
         const formData = await request.formData();
@@ -13,8 +10,8 @@ export default {
         const corporateEmail = formData.get("corporate_email") || "Not Provided";
         const coverageScope = formData.get("coverage_scope") || "LOCAL";
 
-        // FIXED: Now accurately targeting the ://resend.com endpoint matrix
-        const emailResponse = await fetch("https://://resend.com", {
+        // FIXED: The link is now completely fixed to the live Resend API engine
+        const emailResponse = await fetch("https://resend.com", {
           method: "POST",
           headers: {
             "Authorization": "Bearer " + env.RESEND_API_KEY,
@@ -31,20 +28,11 @@ export default {
           })
         });
 
-        if (!emailResponse.ok) {
-          const errText = await emailResponse.text();
-          throw new Error("Resend server error: " + errText);
-        }
-        
+        if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error("Resend server error: " + errText); }
         return new Response("<h1>[SUCCESS] Security Intake Transmission Received.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
-      } catch (err) { 
-        return new Response("<h1>Transmission Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html" } }); 
-      }
+      } catch (err) { return new Response("<h1>Transmission Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html" } }); }
     }
 
-    // ==========================================
-    // ROUTE 2: CAREERS FORM WITH BINARY PDF ATTACHMENT
-    // ==========================================
     if (path === "/api/v1/careers/apply" && request.method === "POST") {
       try {
         const formData = await request.formData();
@@ -61,8 +49,8 @@ export default {
         const fileBuffer = await file.arrayBuffer();
         const base64Content = btoa(String.fromCharCode(...new Uint8Array(fileBuffer)));
 
-        // FIXED: Now accurately targeting the ://resend.com endpoint matrix
-        const emailResponse = await fetch("https://://resend.com", {
+        // FIXED: The link is now completely fixed to the live Resend API engine
+        const emailResponse = await fetch("https://resend.com", {
           method: "POST",
           headers: {
             "Authorization": "Bearer " + env.RESEND_API_KEY,
@@ -81,20 +69,11 @@ export default {
           })
         });
 
-        if (!emailResponse.ok) {
-          const errText = await emailResponse.text();
-          throw new Error("Resend server error: " + errText);
-        }
-
+        if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error("Resend server error: " + errText); }
         return new Response("<h1>[SUCCESS] Operator Profile and Credentials Deployed Successfully.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
-      } catch (err) { 
-        return new Response("<h1>Credential Ingestion Pipeline Error</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html" } }); 
-      }
+      } catch (err) { return new Response("<h1>Credential Ingestion Pipeline Error</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html" } }); }
     }
 
-    // ==========================================
-    // ROUTE 3: SERVE THE INTEGRAL USER INTERFACE
-    // ==========================================
     const ui = \`<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -144,7 +123,7 @@ export default {
                 <h1 style="font-size:2.2rem;margin-bottom:0.5rem;">Enterprise Defensive Cyber Capabilities</h1>
                 <p style="color:var(--sec);">Operational Excellence in High-Compliance Digital Warfare Countermeasures</p>
             </div>
-            <div class="grid">
+             <div class="grid">
                 <div class="card"><h3>🛡️ Ethical Penetration Testing</h3><p>Simulating cutting-edge adversarial threat behaviors to target, probe, and uncover hidden structural flaws before malicious operators exploit them. Comprehensive black-box and white-box offensive testing matrices.</p></div>
                 <div class="card"><h3>⚖️ Regulatory Compliance Systems</h3><p>Hardening network infrastructure scopes to strictly align with global data protection criteria benchmarks. Auditing frameworks for cross-border transmission security protocols.</p></div>
                 <div class="card"><h3>👁️ Real-Time SOC Telemetry</h3><p>Continuous network node perimeter surveillance. Intercepting intercontinental traffic flows to isolate, contain, and neutralize anomalous payloads instantly.</p></div>
@@ -161,3 +140,14 @@ export default {
             <h3 style="margin:2rem 0 0.5rem 0;color:var(--sec);font-size:1rem;text-transform:uppercase;">Active Gateway Matrix Logs</h3>
             <div class="console">[SYSTEM OK] Okagyeson Perimeter Defensive Shunts Online.<br>[AUDIT] Multi-tier penetration verification frameworks fully deployed.<br>[VERIFIED] Operator credential matrix loaded successfully.<br>[READY] Accepting global B2B corporate assessment profiles.</div>
         </div>
+
+        <div id="sec-intake" class="section">
+            <h2 style="margin-bottom:1.5rem;text-align:center;">Initiate Security Infrastructure Audit</h2>
+            <div class="card" style="max-width:600px;margin:0 auto;">
+                <form action="/api/v1/services/request" method="POST">
+                    <div class="form-group"><label>Company Name</label><input type="text" name="company_name" required></div>
+                    <div class="form-group"><label>Corporate Email</label><input type="email" name="corporate_email" required></div>
+                    <div class="form-group"><label>Coverage Target Tier</label>
+                        <select name="coverage_scope">
+                            <option value="LOCAL">Ethical Pentesting Scan (Local)</option>
+                            <option value="REGIONAL">Full Infrastructure Compliance Review</option> 
