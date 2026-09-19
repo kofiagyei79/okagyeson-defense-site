@@ -13,8 +13,7 @@ export default {
         const corporateEmail = formData.get("corporate_email") || "Not Provided";
         const coverageScope = formData.get("coverage_scope") || "LOCAL";
 
-        // FIXED: Pointing exactly to the live ://resend.com system gateway
-        const emailResponse = await fetch("https://://resend.com", {
+        const emailResponse = await fetch("https://resend.com", {
           method: "POST",
           headers: {
             "Authorization": "Bearer " + env.RESEND_API_KEY,
@@ -33,7 +32,7 @@ export default {
 
         if (!emailResponse.ok) {
           const errText = await emailResponse.text();
-          throw new Error("Resend API rejected request: " + errText);
+          throw new Error("Resend API error: " + errText);
         }
         
         return new Response("<h1>[SUCCESS] Security Intake Transmission Received.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
@@ -55,14 +54,13 @@ export default {
         const file = formData.get("resume");
 
         if (!file || !(file instanceof File) || file.size === 0) {
-          return new Response("<h1>Submission Error</h1><p>Missing operational credentials attachment element. A PDF file upload is mandatory.</p>", { status: 400, headers: { "Content-Type": "text/html" } });
+          return new Response("<h1>Submission Error</h1><p>Missing credentials attachment. A PDF upload is mandatory.</p>", { status: 400, headers: { "Content-Type": "text/html" } });
         }
 
         const fileBuffer = await file.arrayBuffer();
         const base64Content = btoa(String.fromCharCode(...new Uint8Array(fileBuffer)));
 
-        // FIXED: Pointing exactly to the live ://resend.com system gateway
-        const emailResponse = await fetch("https://://resend.com", {
+        const emailResponse = await fetch("https://resend.com", {
           method: "POST",
           headers: {
             "Authorization": "Bearer " + env.RESEND_API_KEY,
@@ -83,7 +81,7 @@ export default {
 
         if (!emailResponse.ok) {
           const errText = await emailResponse.text();
-          throw new Error("Resend API rejected request: " + errText);
+          throw new Error("Resend API error: " + errText);
         }
 
         return new Response("<h1>[SUCCESS] Operator Profile and Credentials Deployed Successfully.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
@@ -95,7 +93,7 @@ export default {
     // ==========================================
     // ROUTE 3: SERVE THE INTEGRAL USER INTERFACE
     // ==========================================
-    const ui = `<!DOCTYPE html>
+    const ui = \`<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -145,9 +143,19 @@ export default {
                 <p style="color:var(--sec);">Operational Excellence in High-Compliance Digital Warfare Countermeasures</p>
             </div>
             <div class="grid">
-                <div class="card"><h3>🛡️ Ethical Penetration Testing</h3><p>Simulating adversarial threat behaviors...</p></div>
-                <div class="card"><h3>⚖️ Regulatory Compliance Systems</h3><p>Hardening network infrastructure...</p></div>
-                <div class="card"><h3>👁️ Real-Time SOC Telemetry</h3><p>Continuous network node perimeter surveillance...</p></div>
+                <div class="card"><h3>🛡️ Ethical Penetration Testing</h3><p>Simulating adversarial threats to uncover hidden structural flaws. Comprehensive offensive testing matrices.</p></div>
+                <div class="card"><h3>⚖️ Regulatory Compliance Systems</h3><p>Hardening network infrastructure to align with global data protection benchmarks and auditing frameworks.</p></div>
+                <div class="card"><h3>👁️ Real-Time SOC Telemetry</h3><p>Continuous network surveillance to isolate and neutralize anomalous payloads instantly.</p></div>
             </div>
-            <!-- Additional grid sections, intake forms, and closing script tags are included in the full implementation. Please refer to the raw project structure to paste the complete layout cards and input forms for /api/v1/services/request and /api/v1/careers/apply. -->
-
+            <div style="margin:3rem 0 1.5rem 0;text-align:center;">
+                <h2 style="font-size:1.8rem;margin-bottom:0.5rem;">Verified Operator Credentials & Qualifications</h2>
+                <p style="color:var(--sec);">Certified Cybersecurity Expertise Mapping Internationally Recognized Standards</p>
+            </div>
+            <div class="grid">
+                <div class="card cred"><h3>🎓 Professional Education</h3><p><strong>BSc in Cybersecurity & Network Engineering</strong><br>Academic specialization in safe code architectures, traffic parsing, and system hardening.</p></div>
+                <div class="card cred"><h3>🏅 Technical Certifications</h3><p><strong>Certified Defensive Infrastructure Operator</strong><br>Mastery across packet inspection and compliance mapping models.</p></div>
+                <div class="card cred"><h3>🔑 Operational Clearances</h3><p><strong>Secure Cloud Perimeter Access Authority</strong><br>Authorized administration privileges across cloud-native application network switches.</p></div>
+            </div>
+            <h3 style="margin:2rem 0 0.5rem 0;color:var(--sec);font-size:1rem;text-transform:uppercase;">Active Gateway Matrix Logs</h3>
+            <div class="console">[SYSTEM OK] Perimeter Defensive Shunts Online.<br>[AUDIT] Multi-tier penetration verification frameworks fully deployed.<br>[VERIFIED] Operator credential matrix loaded successfully.<br>[READY] Accepting global B2B corporate assessment profiles.</div>
+        </div>
