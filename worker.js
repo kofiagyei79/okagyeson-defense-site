@@ -155,6 +155,9 @@ export default {
                 <p style="color:var(--sec);">Operational Excellence in High-Compliance Digital Warfare Countermeasures</p>
             </div>
             <div class="grid">
+             measures</p>
+            </div>
+            <div class="grid">
                 <div class="card"><h3>🛡️ Ethical Penetration Testing</h3><p>Simulating cutting-edge adversarial threat behaviors to target, probe, and uncover hidden structural flaws before malicious operators exploit them. Comprehensive black-box and white-box offensive testing matrices.</p></div>
                 <div class="card"><h3>⚖️ Regulatory Compliance Systems</h3><p>Hardening network infrastructure scopes to strictly align with global data protection criteria benchmarks. Auditing frameworks for cross-border transmission security protocols.</p></div>
                 <div class="card"><h3>👁️ Real-Time SOC Telemetry</h3><p>Continuous network node perimeter surveillance. Intercepting intercontinental traffic flows to isolate, contain, and neutralize anomalous payloads instantly.</p></div>
@@ -230,3 +233,4 @@ export default {
     });
   }
 };
+   
