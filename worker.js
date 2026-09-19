@@ -2,7 +2,7 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const path = url.pathname;
-    const secureKey = (typeof RESEND_API_KEY !== 'undefined') ? RESEND_API_KEY : (env && env.RESEND_API_KEY);
+    const secureKey = env.RESEND_API_KEY;
 
     // 1. ROUTE: Technical Service Consultation Requests
     if (path === "/api/v1/services/request" && request.method === "POST") {
@@ -12,8 +12,6 @@ export default {
         const corporateEmail = formData.get("corporate_email") || "Not Provided";
         const coverageScope = formData.get("coverage_scope") || "LOCAL";
 
-        if (!secureKey) throw new Error("RESEND_API_KEY variable is inaccessible.");
-
         const emailResponse = await fetch("https://resend.com", {
           method: "POST",
           headers: { "Authorization": "Bearer " + secureKey, "Content-Type": "application/json" },
@@ -21,16 +19,15 @@ export default {
             from: "onboarding@resend.dev",
             to: "kofiagyei79@gmail.com",
             subject: "🚨 New Audit Request from " + companyName,
-            html: `<h3>Okagyeson Defense Network Intake Alert</h3>
-                   <p><strong>Company Name:</strong> ${companyName}</p>
-                   <p><strong>Corporate Email:</strong> ${corporateEmail}</p>
-                   <p><strong>Coverage Scope Target:</strong> ${coverageScope}</p>`
+            html: "<h3>Okagyeson Defense Intake Alert</h3><p><strong>Company:</strong> " + companyName + "</p><p><strong>Email:</strong> " + corporateEmail + "</p><p><strong>Scope:</strong> " + coverageScope + "</p>"
           })
         });
 
         if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error(errText); }
         return new Response("<h1>[SUCCESS] Security Intake Received.</h1><p><a href='/'>Return to dashboard.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
-      } catch (err) { return new Response("<h1>Transmission Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); }
+      } catch (err) { 
+        return new Response("<h1>Transmission Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
+      }
     }
 
     // 2. ROUTE: Careers Application System Ingest with Attached PDF Document
@@ -43,7 +40,6 @@ export default {
         const appliedRole = formData.get("applied_role") || "Not Provided";
         const file = formData.get("resume");
 
-        if (!secureKey) throw new Error("RESEND_API_KEY variable is inaccessible.");
         if (!file || !(file instanceof File) || file.size === 0) {
           return new Response("<h1>Submission Error</h1><p>Missing PDF file upload.</p>", { status: 400, headers: { "Content-Type": "text/html; charset=utf-8" } });
         }
@@ -58,18 +54,16 @@ export default {
             from: "onboarding@resend.dev",
             to: "kofiagyei79@gmail.com",
             subject: "💼 New Candidate Application: " + appliedRole,
-            html: `<h3>New System Operator Application Ingested</h3>
-                   <p><strong>Operator Name:</strong> ${fullName}</p>
-                   <p><strong>Contact Email:</strong> ${email}</p>
-                   <p><strong>Deployment Region:</strong> ${targetRegion}</p>
-                   <p><strong>Applied Operational Role:</strong> ${appliedRole}</p>`,
+            html: "<h3>New Application Ingested</h3><p><strong>Name:</strong> " + fullName + "</p><p><strong>Email:</strong> " + email + "</p><p><strong>Region:</strong> " + targetRegion + "</p><p><strong>Role:</strong> " + appliedRole + "</p>",
             attachments: [{ filename: file.name || "resume.pdf", content: base64Content }]
           })
         });
 
         if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error(errText); }
         return new Response("<h1>[SUCCESS] Operator Profile Deployed Successfully.</h1><p><a href='/'>Return to dashboard.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
-      } catch (err) { return new Response("<h1>Credential Ingestion Pipeline Error</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); }
+      } catch (err) { 
+        return new Response("<h1>Credential Ingestion Pipeline Error</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
+      }
     }
 
     // 3. ROUTE: Serve the Complete Visual User Dashboard Application
@@ -121,9 +115,14 @@ export default {
                 <div class="card cred"><h3>🔑 Operational Clearances</h3><p><strong>Secure Cloud Perimeter Access Authority</strong><br>Authorized administration privileges across cloud-native application network switches, secure API gateways, and distributed clusters.</p></div>
             </div>
             <h3 style="margin:2rem 0 0.5rem 0;color:var(--sec);font-size:1rem;text-transform:uppercase;">Active Gateway Matrix Logs</h3>
-ode perimeter surveillance. Intercepting traffic flows to isolate, contain, and neutralize anomalous payloads instantly.</p></div>
-            </div>
-            <div style="margin:3rem 0 1.5rem 0;text-align:center;"><h2 style="font-size:1.8rem;margin-bottom:0.5rem;">Verified Operator Credentials & Qualifications</h2><p style="color:var(--sec);">Certified Cybersecurity Expertise Mapping Internationally Recognized Standards</p></div>
+            <div class="console">[SYSTEM OK] Okagyeson Perimeter Defensive Shunts Online.<br>[AUDIT] Multi-tier penetration verification frameworks fully deployed.<br>[VERIFIED] Operator credential matrix loaded successfully.<br>[READY] Accepting global B2B corporate assessment profiles.</div>
+        </div>
+
+        <div id="sec-intake" class="section">
+            <h2 style="margin-bottom:1.5rem;text-align:center;">Initiate Security Infrastructure Audit</h2>
+            <div class="card" style="max-width:600px;margin:0 auto;">
+                <form action="/api/v1/services/request" method="POST">
+ally Recognized Standards</p></div>
             <div class="grid">
                 <div class="card cred"><h3>🎓 Professional Education</h3><p><strong>BSc in Cybersecurity & Network Engineering</strong><br>Rigorous academic specialization in safe code architectures, advanced data traffic parsing, system hardening, and cryptography.</p></div>
                 <div class="card cred"><h3>🏅 Technical Certifications</h3><p><strong>Certified Defensive Infrastructure Operator</strong><br>Validated mastery across enterprise packet inspection pipeline controls, threat countermeasure execution, and regulatory compliance.</p></div>
