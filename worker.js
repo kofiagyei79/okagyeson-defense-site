@@ -1,9 +1,9 @@
-export default {
+  export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // Fallback key resolver context logic
+    // Secure hidden environment key resolver
     const secureKey = (typeof RESEND_API_KEY !== 'undefined') ? RESEND_API_KEY : (env && env.RESEND_API_KEY);
 
     // ==========================================
@@ -148,7 +148,8 @@ export default {
             </div>
             <div class="grid">
                 <div class="card cred"><h3>🎓 Professional Education</h3><p><strong>BSc in Cybersecurity & Network Engineering</strong><br>Rigorous academic specialization in safe code architectures, advanced data traffic parsing, structural system hardening, and secure cryptography operations.</p></div>
-                <div class="card cred"><h3>🏅 Technical Certifications</h3><p><strong>Certified Defensive Infrastructure Operator</strong><br>Validated mastery across enterprise packet inspection pipeline controls, threat countermeasure execution, and regulatory compliance mapping models.</p></div>
+             
+ <div class="card cred"><h3>🏅 Technical Certifications</h3><p><strong>Certified Defensive Infrastructure Operator</strong><br>Validated mastery across enterprise packet inspection pipeline controls, threat countermeasure execution, and regulatory compliance mapping models.</p></div>
                 <div class="card cred"><h3>🔑 Operational Clearances</h3><p><strong>Secure Cloud Perimeter Access Authority</strong><br>Authorized administration privileges across cloud-native application network switches, secure API key gateways, and distributed database cluster layers.</p></div>
             </div>
             <h3 style="margin:2rem 0 0.5rem 0;color:var(--sec);font-size:1rem;text-transform:uppercase;">Active Gateway Matrix Logs</h3>
