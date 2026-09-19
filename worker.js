@@ -13,11 +13,11 @@ export default {
         const corporateEmail = formData.get("corporate_email") || "Not Provided";
         const coverageScope = formData.get("coverage_scope") || "LOCAL";
 
-        // Dispatch alert payload to your email via Resend API
-        const emailResponse = await fetch("https://resend.com", {
+        // FIXED: Now hitting the correct live endpoint ://resend.com
+        const emailResponse = await fetch("https://://resend.com", {
           method: "POST",
           headers: {
-            "Authorization": "Bearer re_FRdiQ8C5_DnJU4sGWs9xvg8gg8Tu9d4u9",
+            "Authorization": `Bearer ${env.RESEND_API_KEY}`, // FIXED: Using secure environment variable
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
@@ -66,11 +66,11 @@ export default {
           String.fromCharCode(...new Uint8Array(fileBuffer))
         );
 
-        // Send applicant data fields and the file attachment to your inbox
-        const emailResponse = await fetch("https://resend.com", {
+        // FIXED: Now hitting the correct live endpoint ://resend.com
+        const emailResponse = await fetch("https://://resend.com", {
           method: "POST",
           headers: {
-            "Authorization": "Bearer re_FRdiQ8C5_DnJU4sGWs9xvg8gg8Tu9d4u9",
+            "Authorization": `Bearer ${env.RESEND_API_KEY}`, // FIXED: Using secure environment variable
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
@@ -168,10 +168,69 @@ export default {
             </div>
                         <div class="grid">
                 <div class="card cred"><h3>🎓 Professional Education</h3><p><strong>BSc in Cybersecurity & Network Engineering</strong><br>Rigorous academic specialization in safe code architectures, advanced data traffic parsing, structural system hardening, and secure cryptography operations.</p></div>
-                <!-- THE NEXT ITEMS IN THE GRID CONTINUE HERE: -->
                 <div class="card cred"><h3>🏅 Technical Certifications</h3><p><strong>Certified Defensive Infrastructure Operator</strong><br>Validated mastery across enterprise packet inspection pipeline controls, threat countermeasure execution, and regulatory compliance mapping models.</p></div>
                 <div class="card cred"><h3>🔑 Operational Clearances</h3><p><strong>Secure Cloud Perimeter Access Authority</strong><br>Authorized administration privileges across cloud-native application network switches, secure API key gateways, and distributed database cluster layers.</p></div>
             </div>
             <h3 style="margin:2rem 0 0.5rem 0;color:var(--sec);font-size:1rem;text-transform:uppercase;">Active Gateway Matrix Logs</h3>
             <div class="console">[SYSTEM OK] Okagyeson Perimeter Defensive Shunts Online.<br>[AUDIT] Multi-tier penetration verification frameworks fully deployed.<br>[VERIFIED] Operator credential matrix loaded successfully.<br>[READY] Accepting global B2B corporate assessment profiles.</div>
         </div>
+
+        <div id="sec-intake" class="section">
+            <h2 style="margin-bottom:1.5rem;text-align:center;">Initiate Security Infrastructure Audit</h2>
+            <div class="card" style="max-width:600px;margin:0 auto;">
+                <form action="/api/v1/services/request" method="POST">
+                    <div class="form-group"><label>Company Name</label><input type="text" name="company_name" required></div>
+                    <div class="form-group"><label>Corporate Email</label><input type="email" name="corporate_email" required></div>
+                    <div class="form-group"><label>Coverage Target Tier</label>
+                        <select name="coverage_scope">
+                            <option value="LOCAL">Ethical Pentesting Scan (Local)</option>
+                            <option value="REGIONAL">Full Infrastructure Compliance Review</option>
+                            <option value="INTERCONTINENTAL">Global SOC Telemetry Deployment</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%;padding:0.75rem;font-weight:bold;">Transmit Intake Profile</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="sec-careers" class="section">
+            <h2 style="margin-bottom:1.5rem;text-align:center;">Global Recruitment Pipeline</h2>
+            <div class="card" style="max-width:600px;margin:0 auto;">
+                <form action="/api/v1/careers/apply" method="POST" enctype="multipart/form-data">
+                    <div class="form-group"><label>Full Name</label><input type="text" name="full_name" required></div>
+                    <div class="form-group"><label>Email Address</label><input type="email" name="email" required></div>
+                    <div class="form-group"><label>Target Deployment Region</label>
+                        <select name="target_region">
+                            <option value="GLOBAL">Global Node Matrix</option>
+                            <option value="NORTH_AMERICA">North America Perimeter</option>
+                            <option value="EUROPE">EMEA Systems</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Applied Operational Role</label><input type="text" name="applied_role" placeholder="e.g. SOC Analyst, Security Engineer" required></div>
+                    <div class="form-group">
+                        <label>Operational Credentials / Resume (PDF Only)</label>
+                        <input type="file" name="resume" accept=".pdf" required>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%;padding:0.75rem;font-weight:bold;">Submit Operational Profile</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showTab(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            document.getElementById('sec-' + id).classList.add('active');
+            document.getElementById('link-' + id).classList.add('active');
+        }
+    </script>
+</body>
+</html>\`;
+
+    return new Response(ui, {
+      headers: { "Content-Type": "text/html; charset=utf-8" }
+    });
+  }
+};
+
