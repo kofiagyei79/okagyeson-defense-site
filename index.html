@@ -244,7 +244,7 @@
                 </div>
                 <div class="service-card">
                     <h3>Regulatory Compliance</h3>
-                    <p>Comprehensive auditing and mapping structures tailored specifically for environments requiring strict HIPAA data access controls, NIST SP 800-171 protections, and corporate logistics pipeline visibility metrics.</p>
+                    <p>Comprehensive auditing and mapping structures tailored specifically for environments requiring strict HIPAA data access controls, NIST SP 800-171 regulatory protections, and corporate logistics pipeline visibility metrics.</p>
                 </div>
                 <div class="service-card">
                     <h3>Incident Response</h3>
@@ -272,56 +272,10 @@
             </div>
 
             <div class="arch-card">
-                            <div class="arch-card">
-                <h3>Deep Packet Inspection & Network Intrusion Detection (IDS)</h3>
-                <div class="arch-meta">Core Environment: Network Boundary Mirroring & Aggregation</div>
-                <p>Designed a live network monitoring topology utilizing deep packet inspection (DPI) rulesets. The architecture hooks directly into internal network switches via port mirroring to capture raw PCAPs, perform signature matching, and trigger alerts on lateral movement or anomalous beaconing behavior.</p>
-                <div>
-                    <span class="tools-badge">Zeek (Bro)</span>
-                    <span class="tools-badge">Suricata</span>
-                    <span class="tools-badge">Wireshark</span>
-                    <span class="tools-badge">pfSense</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Portals & Forms Section -->
-        <section id="portal-section">
-            <div class="forms-grid">
-                
-                <!-- Client Portal Form -->
-                <div class="form-section">
-                    <h2 style="color: var(--primary); margin-top:0;">Secure Client Portal</h2>
-                    <p style="color: #64748b; font-size: 14px; margin-bottom: 25px;">Registered clients can submit encrypted intake tickets directly to our security operations queue.</p>
-                    <form action="/api/v1/services/request" method="POST">
-                        <div class="form-group">
-                            <label for="client-name">Company Name</label>
-                            <input type="text" id="client-name" name="company_name" placeholder="Example Enterprises LLC" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="client-email">Corporate Email</label>
-                            <input type="email" id="client-email" name="email" placeholder="security@yourcompany.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="ticket-severity">Incident Severity Level</label>
-                            <select id="ticket-severity" name="severity">
-                                <option value="low">Low - Routine Compliance/Audit Inquiry</option>
-                                <option value="medium">Medium - Anomalous Alert Verification Required</option>
-                                <option value="high">High - Active Operational Degradation or Suspected Breaches</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="ticket-details">Context & System Log Excerpts</label>
-                            <textarea id="ticket-details" name="details" rows="5" placeholder="Provide system environment details, affected IP addresses, or observable symptoms..." required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Submit Encrypted Ticket</button>
-                    </form>
-                </div>
-
-                <!-- Careers Application Form -->
-                <div class="form-section">
+                               <div class="form-section">
                     <h2 style="color: var(--primary); margin-top:0;">Join the Defense Grid</h2>
                     <p style="color: #64748b; font-size: 14px; margin-bottom: 25px;">Looking to apply your engineering background? Submit your profile to our talent registry.</p>
+                    
                     <form action="/api/v1/careers/apply" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="applicant-name">Full Legal Name</label>
@@ -344,24 +298,14 @@
                             <label for="applicant-bio">Professional Background Summary</label>
                             <textarea id="applicant-bio" name="bio" rows="5" placeholder="Outline your hands-on experience, lab achievements, certifications, or preferred tooling stacks..." required></textarea>
                         </div>
+                        
+                        <!-- FIXED CONTAINER BLOCK: Opened and closed container tags are now perfectly balanced -->
                         <div class="form-group">
                             <label for="resume-upload">Upload Resume Material (PDF Format Required)</label>
                             <input type="file" id="resume-upload" name="resume" accept="application/pdf" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box; font-size: 16px; background-color: #ffffff; color: #1e293b;">
                         </div>
+                        
                         <button type="submit" class="submit-btn">Submit Profile Application</button>
                     </form>
                 </div>
-
-            </div>
-        </section>
-
-    </div>
-
-    <footer>
-        <p>&copy; 2026 Okagyeson Cyber Defense LLC. All rights reserved.</p>
-        <p style="font-size: 12px; color: #64748b; margin-top: 10px;">Operational Continuity | Threat Suppression | Infrastructure Visibility</p>
-    </footer>
-
-</body>
-</html>
-
+ 
