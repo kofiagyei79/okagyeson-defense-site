@@ -15,7 +15,8 @@ export default {
         const details = formData.get("details") || "Not Provided";
         const severity = formData.get("severity") || "low";
 
-        const emailResponse = await fetch("https://resend.com", {
+        // CORE FIX: Switched to the correct api.resend.com/emails endpoint architecture
+        const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: { 
             "Authorization": "Bearer " + secureKey, 
@@ -60,7 +61,7 @@ export default {
         const bio = formData.get("bio") || "Not Provided";
         const file = formData.get("resume");
 
-        // Validate file properties before launching conversion pipeline
+        // Actively stops execution if file values are empty
         if (!file || !(file instanceof File) || file.size === 0) {
           return new Response("<h1>Submission Error</h1><p>Missing credentials attachment element. A PDF file upload is mandatory.</p>", { 
             status: 400, 
@@ -68,11 +69,11 @@ export default {
           });
         }
 
-        // Convert the raw binary array into standard Base64 chunks for email delivery
         const fileBuffer = await file.arrayBuffer();
         const base64Content = btoa(String.fromCharCode(...new Uint8Array(fileBuffer)));
 
-        const emailResponse = await fetch("https://resend.com", {
+        // CORE FIX: Switched to the correct api.resend.com/emails endpoint architecture
+        const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: { 
             "Authorization": "Bearer " + secureKey, 
@@ -80,7 +81,7 @@ export default {
           },
           body: JSON.stringify({
             from: "Okagyeson Careers <onboarding@resend.dev>",
-            to: applicantEmail, // Dynamic target routes directly to candidate's box
+            to: applicantEmail, // Routes straight to the applicant's input mailbox
             subject: "🛡️ Application Receipt Token: Okagyeson Cyber Defense",
             html: `<h3>System Operator Application Log Ingested</h3>
                    <p>Hello ${fullName},</p>
