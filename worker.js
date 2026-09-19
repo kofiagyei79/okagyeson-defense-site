@@ -19,14 +19,17 @@ export default {
             from: "onboarding@resend.dev",
             to: "kofiagyei79@gmail.com",
             subject: "🚨 New Audit Request from " + companyName,
-            html: "<h3>Okagyeson Defense Intake Alert</h3><p><strong>Company:</strong> " + companyName + "</p><p><strong>Email:</strong> " + corporateEmail + "</p><p><strong>Scope:</strong> " + coverageScope + "</p>"
+            html: `<h3>Okagyeson Defense Network Intake Alert</h3>
+                   <p><strong>Company Name:</strong> ${companyName}</p>
+                   <p><strong>Corporate Email:</strong> ${corporateEmail}</p>
+                   <p><strong>Coverage Scope Target:</strong> ${coverageScope}</p>`
           })
         });
 
         if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error(errText); }
-        return new Response("<h1>[SUCCESS] Security Intake Received.</h1><p><a href='/'>Return to dashboard.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
+        return new Response("<h1>[SUCCESS] Security Intake Transmission Received.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
       } catch (err) { 
-        return new Response("<h1>Transmission Failure</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
+        return new Response("<h1>Transmission Failure Error Node</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
       }
     }
 
@@ -41,7 +44,7 @@ export default {
         const file = formData.get("resume");
 
         if (!file || !(file instanceof File) || file.size === 0) {
-          return new Response("<h1>Submission Error</h1><p>Missing PDF file upload.</p>", { status: 400, headers: { "Content-Type": "text/html; charset=utf-8" } });
+          return new Response("<h1>Submission Error</h1><p>Missing credentials attachment element. A PDF file upload is mandatory.</p>", { status: 400, headers: { "Content-Type": "text/html; charset=utf-8" } });
         }
 
         const fileBuffer = await file.arrayBuffer();
@@ -54,15 +57,19 @@ export default {
             from: "onboarding@resend.dev",
             to: "kofiagyei79@gmail.com",
             subject: "💼 New Candidate Application: " + appliedRole,
-            html: "<h3>New Application Ingested</h3><p><strong>Name:</strong> " + fullName + "</p><p><strong>Email:</strong> " + email + "</p><p><strong>Region:</strong> " + targetRegion + "</p><p><strong>Role:</strong> " + appliedRole + "</p>",
+            html: `<h3>New System Operator Application Ingested</h3>
+                   <p><strong>Operator Name:</strong> ${fullName}</p>
+                   <p><strong>Contact Email:</strong> ${email}</p>
+                   <p><strong>Deployment Region:</strong> ${targetRegion}</p>
+                   <p><strong>Applied Operational Role:</strong> ${appliedRole}</p>`,
             attachments: [{ filename: file.name || "resume.pdf", content: base64Content }]
           })
         });
 
         if (!emailResponse.ok) { const errText = await emailResponse.text(); throw new Error(errText); }
-        return new Response("<h1>[SUCCESS] Operator Profile Deployed Successfully.</h1><p><a href='/'>Return to dashboard.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
+        return new Response("<h1>[SUCCESS] Operator Profile and Credentials Deployed Successfully.</h1><p><a href='/'>Return to dashboard node.</a></p>", { status: 200, headers: { "Content-Type": "text/html; charset=utf-8" } });
       } catch (err) { 
-        return new Response("<h1>Credential Ingestion Pipeline Error</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
+        return new Response("<h1>Credential Ingestion Pipeline Error Node</h1><p>" + err.message + "</p>", { status: 500, headers: { "Content-Type": "text/html; charset=utf-8" } }); 
       }
     }
 
@@ -99,37 +106,30 @@ export default {
     </style>
 </head>
 <body>
-    <header><div class="nav-box"><div style="font-weight:700;font-size:1.3rem;">🛡️ Okagyeson <span style="color:var(--blue);">Defense</span></div><ul class="nav-links"><li><a onclick="showTab('services')" id="link-services" class="active">Our Services & Capabilities</a></li><li><a onclick="showTab('intake')" id="link-intake">Request Audit</a></li><li><a onclick="showTab('careers')" id="link-careers">Careers</a></li></ul><button class="btn" onclick="showTab('intake')">Contact Node</button></div></header>
+    <header>
+        <div class="nav-box">
+            <div style="font-weight:700;font-size:1.3rem;">🛡️ Okagyeson <span style="color:var(--blue);">Defense</span></div>
+            <ul class="nav-links">
+                <li><a onclick="showTab('services')" id="link-services" class="active">Our Services & Capabilities</a></li>
+                <li><a onclick="showTab('intake')" id="link-intake">Request Audit</a></li>
+                <li><a onclick="showTab('careers')" id="link-careers">Careers</a></li>
+            </ul>
+            <button class="btn" onclick="showTab('intake')">Contact Node</button>
+        </div>
+    </header>
     <main>
         <div id="sec-services" class="section active">
-            <div style="margin-bottom:2rem;text-align:center;"><h1 style="font-size:2.2rem;margin-bottom:0.5rem;">Enterprise Defensive Cyber Capabilities</h1><p style="color:var(--sec);">Operational Excellence in High-Compliance Digital Warfare Countermeasures</p></div>
-            <div class="grid">
-                <div class="card"><h3>🛡️ Ethical Penetration Testing</h3><p>Simulating adversarial threat behaviors to target, probe, and uncover hidden structural flaws before malicious operators exploit them.</p></div>
-                <div class="card"><h3>⚖️ Regulatory Compliance Systems</h3><p>Hardening network infrastructure scopes to strictly align with global data protection criteria benchmarks.</p></div>
-                <div class="card"><h3>👁️ Real-Time SOC Telemetry</h3><p>Continuous network node perimeter surveillance. Intercepting traffic flows to isolate, contain, and neutralize anomalous payloads instantly.</p></div>
+            <div style="margin-bottom:2rem;text-align:center;">
+                <h1 style="font-size:2.2rem;margin-bottom:0.5rem;">Enterprise Defensive Cyber Capabilities</h1>
+                <p style="color:var(--sec);">Operational Excellence in High-Compliance Digital Warfare Countermeasures</p>
             </div>
-            <div style="margin:3rem 0 1.5rem 0;text-align:center;"><h2 style="font-size:1.8rem;margin-bottom:0.5rem;">Verified Operator Credentials & Qualifications</h2><p style="color:var(--sec);">Certified Cybersecurity Expertise Mapping Internationally Recognized Standards</p></div>
             <div class="grid">
-                <div class="card cred"><h3>🎓 Professional Education</h3><p><strong>BSc in Cybersecurity & Network Engineering</strong><br>Rigorous academic specialization in safe code architectures, advanced data traffic parsing, system hardening, and cryptography.</p></div>
-                <div class="card cred"><h3>🏅 Technical Certifications</h3><p><strong>Certified Defensive Infrastructure Operator</strong><br>Validated mastery across enterprise packet inspection pipeline controls, threat countermeasure execution, and regulatory compliance.</p></div>
-                <div class="card cred"><h3>🔑 Operational Clearances</h3><p><strong>Secure Cloud Perimeter Access Authority</strong><br>Authorized administration privileges across cloud-native application network switches, secure API gateways, and distributed clusters.</p></div>
+                <div class="card"><h3>🛡️ Penetration Testing</h3><p>Simulating adversarial threat behaviors to target, probe, and uncover flaws.</p></div>
+                <div class="card"><h3>⚖️ Compliance Systems</h3><p>Hardening architecture scopes to strictly align with global benchmarks.</p></div>
+                <div class="card"><h3>👁️ Real-Time Telemetry</h3><p>Continuous network node perimeter surveillance and anomalous payload isolation.</p></div>
             </div>
             <h3 style="margin:2rem 0 0.5rem 0;color:var(--sec);font-size:1rem;text-transform:uppercase;">Active Gateway Matrix Logs</h3>
-            <div class="console">[SYSTEM OK] Okagyeson Perimeter Defensive Shunts Online.<br>[AUDIT] Multi-tier penetration verification frameworks fully deployed.<br>[VERIFIED] Operator credential matrix loaded successfully.<br>[READY] Accepting global B2B corporate assessment profiles.</div>
-        </div>
-
-        <div id="sec-intake" class="section">
-            <h2 style="margin-bottom:1.5rem;text-align:center;">Initiate Security Infrastructure Audit</h2>
-            <div class="card" style="max-width:600px;margin:0 auto;">
-                <form action="/api/v1/services/request" method="POST">
-ally Recognized Standards</p></div>
-            <div class="grid">
-                <div class="card cred"><h3>🎓 Professional Education</h3><p><strong>BSc in Cybersecurity & Network Engineering</strong><br>Rigorous academic specialization in safe code architectures, advanced data traffic parsing, system hardening, and cryptography.</p></div>
-                <div class="card cred"><h3>🏅 Technical Certifications</h3><p><strong>Certified Defensive Infrastructure Operator</strong><br>Validated mastery across enterprise packet inspection pipeline controls, threat countermeasure execution, and regulatory compliance.</p></div>
-                <div class="card cred"><h3>🔑 Operational Clearances</h3><p><strong>Secure Cloud Perimeter Access Authority</strong><br>Authorized administration privileges across cloud-native application network switches, secure API gateways, and distributed clusters.</p></div>
-            </div>
-            <h3 style="margin:2rem 0 0.5rem 0;color:var(--sec);font-size:1rem;text-transform:uppercase;">Active Gateway Matrix Logs</h3>
-            <div class="console">[SYSTEM OK] Okagyeson Perimeter Defensive Shunts Online.<br>[AUDIT] Multi-tier penetration verification frameworks fully deployed.<br>[VERIFIED] Operator credential matrix loaded successfully.<br>[READY] Accepting global B2B corporate assessment profiles.</div>
+            <div class="console">[SYSTEM OK] Okagyeson Perimeter Defensive Shunts Online.<br>[AUDIT] Multi-tier penetration verification frameworks deployed.<br>[READY] Accepting B2B corporate profiles.</div>
         </div>
 
         <div id="sec-intake" class="section">
@@ -151,7 +151,7 @@ ally Recognized Standards</p></div>
         </div>
 
         <div id="sec-careers" class="section">
-            <h2 style="margin-bottom:1.5rem;text-align:center;">Global Recruitment Pipeline</h2>
+                    <h2 style="margin-bottom:1.5rem;text-align:center;">Global Recruitment Pipeline</h2>
             <div class="card" style="max-width:600px;margin:0 auto;">
                 <form action="/api/v1/careers/apply" method="POST" enctype="multipart/form-data">
                     <div class="form-group"><label>Full Name</label><input type="text" name="full_name" required></div>
@@ -183,8 +183,9 @@ ally Recognized Standards</p></div>
         }
     </script>
 </body>
-</html>\`;
+</html>`;
 
     return new Response(ui, { headers: { "Content-Type": "text/html; charset=utf-8" } });
   }
 };
+
